@@ -10,12 +10,19 @@ from .serializer import PostSerializer
 class PostListView(APIView):
 
     def get(self, _request):
-
         posts = Post.objects.all()
-        print('📋 POSTS', posts)
+        print('📝 POSTS', posts)
         serialized_posts = PostSerializer(posts, many=True)
-        print('📋 SERIALIZED POSTS', serialized_posts.data)
+        print('📝 SERIALIZED POSTS', serialized_posts.data)
         return Response(serialized_posts.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        post_to_add = PostSerializer(data=request.data)
+        if post_to_add.is_valid():
+            post_to_add.save()
+            print('📝 POST TO ADD', post_to_add.data)
+            return Response(post_to_add.data, status=status.HTTP_201_CREATED)
+        return Response(post_to_add.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 class PostDetailView(APIView):
 
