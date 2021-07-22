@@ -11,6 +11,11 @@ class Post(models.Model):
         "hashtags.Hashtag",
         related_name = "hashtags"
     )
+    owner = models.ForeignKey(
+        "jwt_auth.User",
+        related_name = "posts",
+        on_delete = models.CASCADE
+    )
 
     def __str__(self):
         return f"{self.title}"

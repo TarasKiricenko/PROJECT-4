@@ -11,7 +11,7 @@ from .serializers.populated import PopulatedPostSerializer
 
 
 class PostListView(APIView):
-    # handle permissions
+    # handle permissions ENABLE FOR LOGGED IN VIEW
     # permission_classes = (IsAuthenticatedOrReadOnly, )
     def get(self, _request):
         posts = Post.objects.all()
@@ -21,6 +21,7 @@ class PostListView(APIView):
         return Response(serialized_posts.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        request.data["owner"] = request.user.id
         post_to_add = PostSerializer(data=request.data)
         if post_to_add.is_valid():
             post_to_add.save()
@@ -29,7 +30,7 @@ class PostListView(APIView):
         return Response(post_to_add.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 class PostDetailView(APIView):
-    # handle permissions
+    # handle permissions ENABLE FOR LOGGED IN VIEW
     # permission_classes = (IsAuthenticatedOrReadOnly, )
     def get_post(self, pk):
         try: 
