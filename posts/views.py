@@ -21,7 +21,7 @@ class PostListView(APIView):
         return Response(serialized_posts.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        request.data["owner"] = request.user.id
+        # request.data["owner"] = request.user.pk ENABLE FOR LOGGED IN VIEW
         post_to_add = PostSerializer(data=request.data)
         if post_to_add.is_valid():
             post_to_add.save()
