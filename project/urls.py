@@ -23,4 +23,5 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('comments/', include('comments.urls')),
     path('hashtags/', include('hashtags.urls')),
+    path('jwt_auth/', include('jwt_auth.urls'))
 ]

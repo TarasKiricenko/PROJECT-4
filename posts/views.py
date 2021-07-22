@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import NotFound
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Post
 
@@ -10,7 +11,8 @@ from .serializers.populated import PopulatedPostSerializer
 
 
 class PostListView(APIView):
-
+    # handle permissions
+    # permission_classes = (IsAuthenticatedOrReadOnly, )
     def get(self, _request):
         posts = Post.objects.all()
         print('📝 POSTS', posts)
@@ -27,7 +29,8 @@ class PostListView(APIView):
         return Response(post_to_add.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 class PostDetailView(APIView):
-
+    # handle permissions
+    # permission_classes = (IsAuthenticatedOrReadOnly, )
     def get_post(self, pk):
         try: 
             return Post.objects.get(pk=pk)
