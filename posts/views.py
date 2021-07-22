@@ -30,9 +30,14 @@ class PostDetailView(APIView):
         try: 
             return Post.objects.get(pk=pk)
         except Post.DoesNotExist:
-            raise NotFound(detail="🆘 Can't find that post!")
+            raise NotFound(detail="🆘 This post does not exist!")
 
     def get(self, _request, pk):
         post = self.get_post(pk=pk)
         serialized_post = PostSerializer(post)
         return Response(serialized_post.data, status=status.HTTP_200_OK)
+
+    def delete(self, _request, pk):
+        post_to_delete = self.get_post(pk=pk)
+        post_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
