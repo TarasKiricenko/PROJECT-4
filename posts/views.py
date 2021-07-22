@@ -41,3 +41,11 @@ class PostDetailView(APIView):
         post_to_delete = self.get_post(pk=pk)
         post_to_delete.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, pk):
+        post_to_edit = self.get_post(pk=pk)
+        updated_post = PostSerializer(post_to_edit, data=request.data)
+        if updated_post.is_valid():
+            updated_post.save()
+            return Response(updated_post.data, status=status.HTTP_202_ACCEPTED)
+        return Response(updated_post.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
