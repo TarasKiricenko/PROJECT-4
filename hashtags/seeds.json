@@ -1,0 +1,268 @@
+[
+{
+  "model": "hashtags.hashtag",
+  "pk": 1,
+  "fields": {
+    "name": "animals"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 2,
+  "fields": {
+    "name": "nature"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 3,
+  "fields": {
+    "name": "knowledge"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 4,
+  "fields": {
+    "name": "relationship"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 5,
+  "fields": {
+    "name": "life"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 6,
+  "fields": {
+    "name": "programming"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 7,
+  "fields": {
+    "name": "react"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 8,
+  "fields": {
+    "name": "django"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 9,
+  "fields": {
+    "name": "cat"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 10,
+  "fields": {
+    "name": "pet"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 11,
+  "fields": {
+    "name": "dog"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 12,
+  "fields": {
+    "name": "people"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 13,
+  "fields": {
+    "name": "math"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 14,
+  "fields": {
+    "name": "life"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 15,
+  "fields": {
+    "name": "source"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 16,
+  "fields": {
+    "name": "work"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 17,
+  "fields": {
+    "name": "hard"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 18,
+  "fields": {
+    "name": "personal"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 19,
+  "fields": {
+    "name": "random"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 20,
+  "fields": {
+    "name": "teaching"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 21,
+  "fields": {
+    "name": "common"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 22,
+  "fields": {
+    "name": "shared"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 23,
+  "fields": {
+    "name": "miscellaneous"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 24,
+  "fields": {
+    "name": "google"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 25,
+  "fields": {
+    "name": "github"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 26,
+  "fields": {
+    "name": "mine"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 27,
+  "fields": {
+    "name": "thank_you"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 28,
+  "fields": {
+    "name": "text"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 29,
+  "fields": {
+    "name": "why_me"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 30,
+  "fields": {
+    "name": "why_not?"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 31,
+  "fields": {
+    "name": "difference"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 32,
+  "fields": {
+    "name": "brilliant"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 33,
+  "fields": {
+    "name": "brave"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 34,
+  "fields": {
+    "name": "emotions"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 35,
+  "fields": {
+    "name": "precise"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 36,
+  "fields": {
+    "name": "relax"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 37,
+  "fields": {
+    "name": "stress"
+  }
+},
+{
+  "model": "hashtags.hashtag",
+  "pk": 38,
+  "fields": {
+    "name": "weather"
+  }
+}
+]

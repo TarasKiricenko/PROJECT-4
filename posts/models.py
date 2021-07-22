@@ -7,6 +7,10 @@ class Post(models.Model):
     image = models.URLField(max_length=500, default=None, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     text = models.TextField(max_length=1000, default=None)
+    hashtags = models.ManyToManyField(
+        "hashtags.Hashtag",
+        related_name = "hashtags"
+    )
 
     def __str__(self):
         return f"{self.title}"
