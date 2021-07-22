@@ -1,0 +1,112 @@
+[
+{
+  "model": "posts.post",
+  "pk": 1,
+  "fields": {
+    "title": "Post about me",
+    "image": "https://media-exp1.licdn.com/dms/image/C4E03AQGv1qk-N_gASQ/profile-displayphoto-shrink_200_200/0/1622059523351?e=1630540800&v=beta&t=WxtIzTxYJEaanZwMUhAlzMyfK-as-FtSUXFqLMXysoQ",
+    "created_at": "2021-07-22T10:43:25.703Z",
+    "text": "Taras is absolutely amazing fella. He is so amazing, that he is amazed himself about how amazing he is. Nothing is more amazing, than amazingness of amazing Taras."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 2,
+  "fields": {
+    "title": "Post about Charlotte",
+    "image": "https://ga-core.s3.amazonaws.com/production/uploads/instructor/image/20206/thumb_IMG_5116.jpg",
+    "created_at": "2021-07-22T10:45:22.509Z",
+    "text": "Charlotte is a great instructor from General Assembly. She is helpful and lovely, always find a way to organise things around, well-prepared and charming."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 3,
+  "fields": {
+    "title": "Post about my girfriend",
+    "image": "https://sun9-17.userapi.com/impf/c307312/v307312363/7173/4xBtrBYAk28.jpg?size=604x488&quality=96&sign=9584ac7a23198a8171ccc204ea0c91ed&c_uniq_tag=-KaUqnnRsyeJesVfsVr18kHpHkE2KaFZZj4RsRqIhto&type=album",
+    "created_at": "2021-07-22T10:49:07.046Z",
+    "text": "This my lady. I love her. She loves cats."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 4,
+  "fields": {
+    "title": "Post about cat",
+    "image": "https://static.boredpanda.com/blog/wp-content/uploads/2019/06/cat-babysitter-friend-photoshoot-fb10.png",
+    "created_at": "2021-07-22T10:53:38.837Z",
+    "text": "Look this, how lovely! Such great cats!"
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 5,
+  "fields": {
+    "title": "Post about django",
+    "image": "https://bs-uploads.toptal.io/blackfish-uploads/blog/post/seo/og_image_file/og_image/15859/0506-integrate-oauth-2-into-django-drf-back-end-Waldek_Social-f4254df1c8797a968caf0135777b7f80.png",
+    "created_at": "2021-07-22T10:55:49.499Z",
+    "text": "That is what we using to create our final projects at GA. Hard to believe, but this is something we need to understand from inside. Very informative picture, though."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 6,
+  "fields": {
+    "title": "Post about triangle",
+    "image": "https://miro.medium.com/max/920/1*xCwX4BesGiTBqGKdVDNgDw.png",
+    "created_at": "2021-07-22T10:58:20.996Z",
+    "text": "A triangle is a polygon with three edges and three vertices. It is one of the basic shapes in geometry. A triangle with vertices A, B, and C is denoted {\\displaystyle \\triangle ABC}\\triangle ABC.[1]\r\nIn Euclidean geometry, any three points, when non-collinear, determine a unique triangle and simultaneously, a unique plane (i.e. a two-dimensional Euclidean space). In other words, there is only one plane that contains that triangle, and every triangle is contained in some plane. \r\n\r\nGood to know when choosing a bar stool, if you see what I mean."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 7,
+  "fields": {
+    "title": "Post about posts",
+    "image": "",
+    "created_at": "2021-07-22T10:59:24.283Z",
+    "text": "So, we can see, that you can make posts here without pictures if you prefer. But that is kinda boring..."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 8,
+  "fields": {
+    "title": "Post about other",
+    "image": "",
+    "created_at": "2021-07-22T11:00:47.445Z",
+    "text": "1 : a different or additional one the others came later. \r\n2a : one that remains of two or more. \r\nb : a thing opposite to or excluded by something else went from one side to the other nature as the other of culture. \r\n3a : one (such as another person) that is psychologically differentiated from the self.\r\n\r\nIt is very important to know, what other means. IMHO"
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 9,
+  "fields": {
+    "title": "Post about how hard it is to work when hot",
+    "image": "https://ih1.redbubble.net/image.441324371.9835/ssrco,slim_fit_t_shirt,flatlay,fafafa:ca443f4786,back,wide_portrait,750x1000-bg,f8f8f8.u5.jpg",
+    "created_at": "2021-07-22T11:05:11.028Z",
+    "text": "Very hard."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 10,
+  "fields": {
+    "title": "Post about React",
+    "image": "https://lh3.googleusercontent.com/proxy/uEG3PM5Hyo5TB-eEErtpUyYqwMOVjNpqAnqYs8xggXIPLETRxPWHWg2Z3RNn_7kcoe9UYAjSvjB2QG54QwQF2zHURMktIERDEDijqILyppjXC7cVu-k",
+    "created_at": "2021-07-22T11:10:47.020Z",
+    "text": "Just look at that terrible setup of fancy fonts. Definitely, not helpful to use.\r\n\r\nAnyway, React is JS library for creation of UI. Based on components, very declarative, convenient, pretty easy to get basics about it."
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 16,
+  "fields": {
+    "title": "Post about water",
+    "image": "https://www.comoxvalleyrd.ca/sites/default/files/uploads/images/banner/water_conservation_tree_and_faucet.jpg",
+    "created_at": "2021-07-22T12:22:36.043Z",
+    "text": "Water (chemical formula H2O) is an inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms (in which it acts as a solvent). It is vital for all known forms of life, even though it provides no calories or organic nutrients. Its chemical formula H2O, indicates that each of its molecules contains one oxygen and two hydrogen atoms, connected by covalent bonds."
+  }
+}
+]
