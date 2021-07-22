@@ -5,14 +5,16 @@ from rest_framework.exceptions import NotFound
 
 from .models import Post
 
-from .serializer import PostSerializer
+from .serializers.common import PostSerializer
+from .serializers.populated import PopulatedPostSerializer
+
 
 class PostListView(APIView):
 
     def get(self, _request):
         posts = Post.objects.all()
         print('📝 POSTS', posts)
-        serialized_posts = PostSerializer(posts, many=True)
+        serialized_posts = PopulatedPostSerializer(posts, many=True)
         print('📝 SERIALIZED POSTS', serialized_posts.data)
         return Response(serialized_posts.data, status=status.HTTP_200_OK)
 
@@ -34,7 +36,7 @@ class PostDetailView(APIView):
 
     def get(self, _request, pk):
         post = self.get_post(pk=pk)
-        serialized_post = PostSerializer(post)
+        serialized_post = PopulatedPostSerializer(post)
         return Response(serialized_post.data, status=status.HTTP_200_OK)
 
     def delete(self, _request, pk):
