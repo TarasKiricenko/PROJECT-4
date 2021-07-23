@@ -1,30 +1,18 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Home from './components/Home'
+import Posts from './components/Posts'
+import Register from './components/Register'
 
 const App = () => {
-  const [posts, setPosts] = useState([])
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios.get('/api/posts') // * <-- replace with your endpoint
-      console.log(data)
-      setPosts(data)
-    }
-    getData()
-  }, [])
-  console.log(posts)
   return (
-    <>
-      {posts.map(item => 
-        <div key={item.id}>
-          <h1>{item.title}</h1>
-          
-        </div>
-      )}
-      {posts.map(item => <div key={item.created_at}>{item.id}</div>)}
-      
-    </>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={Home}/>
+        <Route exact path='/posts' component={Posts}/>
+        <Route exact path='/register' component={Register}/>
+      </Switch>
+    </Router>
   )
-  
 }
 
 export default App
