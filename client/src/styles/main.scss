@@ -5,3 +5,15 @@ img {
 .profile_image {
   max-width: 40px;
 }
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none; 
+  margin: 0;
+  padding: 0;
+  li {
+    margin: 2px;
+    display: inline-block;
+  }
+}

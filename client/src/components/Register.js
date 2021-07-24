@@ -31,8 +31,6 @@ const Register = () => {
     const newErrors = { ...errors, [event.target.name]: '' }
     setFormdata(newFormData)
     setErrors(newErrors)
-    console.log(newFormData)
-    console.log(newErrors)
   }
   const handleSubmit = async (event) => {
     event.preventDefault()

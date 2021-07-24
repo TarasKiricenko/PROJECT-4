@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 
 class CommentListView(APIView):
-    # permission_classes = (IsAuthenticated, ) ENABLE FOR LOGGED IN VIEW
+    # permission_classes = (IsAuthenticated, ) # ENABLE FOR LOGGED IN VIEW
     def post(self, request):
         request.data["onwer"] = request.user.id
         comment_to_create = CommentSerializer(data=request.data)
