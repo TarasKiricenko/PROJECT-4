@@ -2,7 +2,7 @@ export const getTokenFromLocalStorage = () => {
   return window.localStorage.getItem('token')
 }
 
-const getPayload = () => {
+export const getPayload = () => {
   const token = getTokenFromLocalStorage()
   if (!token) return false
   const parts = token.split('.')

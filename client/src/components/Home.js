@@ -25,7 +25,10 @@ const Home = () => {
           <Link to="/posts"><h1>Continue as guest</h1></Link>
         </>
         :
-        <Link onClick={handleLogout}><h1>Logout</h1></Link>
+        <>
+          <Link onClick={handleLogout}><h1>Logout</h1></Link>
+          <Link to="/posts"><h1>See all posts</h1></Link>
+        </>
       }
     </>
   )

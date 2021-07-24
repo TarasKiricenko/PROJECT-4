@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { getTokenFromLocalStorage } from './authentication/authentication'
 
 const AddPost = () => {
@@ -83,6 +83,8 @@ const AddPost = () => {
   }
   return (
     <>
+      <Link to='/'><h1>Go back to homepage</h1></Link>
+      <Link to='/posts'><h1>See all posts</h1></Link>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name your post</label>
