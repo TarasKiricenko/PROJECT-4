@@ -94,7 +94,7 @@
   "pk": 10,
   "fields": {
     "title": "Post about React",
-    "image": "https://lh3.googleusercontent.com/proxy/uEG3PM5Hyo5TB-eEErtpUyYqwMOVjNpqAnqYs8xggXIPLETRxPWHWg2Z3RNn_7kcoe9UYAjSvjB2QG54QwQF2zHURMktIERDEDijqILyppjXC7cVu-k",
+    "image": "https://thejs.dev/static/4603bf8d46c45eda4c776f516318b6b7/dd13c/hero.jpg",
     "created_at": "2021-07-22T11:10:47.020Z",
     "text": "Just look at that terrible setup of fancy fonts. Definitely, not helpful to use.\r\n\r\nAnyway, React is JS library for creation of UI. Based on components, very declarative, convenient, pretty easy to get basics about it."
   }

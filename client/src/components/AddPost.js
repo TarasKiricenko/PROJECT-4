@@ -95,7 +95,7 @@ const AddPost = () => {
           <label>Name your post</label>
           <input
             onChange={handleChange}
-            type="text"
+            type="textarea"
             name="title"
             placeholder="Enter a name for your post"
             value={formdata.title}

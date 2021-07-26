@@ -112,82 +112,92 @@ const Posts = () => {
   }
   return (
     <>
-      <Link to='/'><h1>Go back to homepage</h1></Link>
-      <Link to='/addpost'><h1>Add post</h1></Link>
-      {posts.map(item =>
-        <div key={item.id} id={item.id}>
-          <h1>{item.title}</h1>
-          <p>{item.text}</p>
-          <p className="hidden">{item.owner.id}</p>
-          <Link to="/posts" onClick={openInNewTab}><img src={item.image} /></Link>
-          <div>
-            {item.hashtags.map(hashtag =>
-              <div key={hashtag.id}>
-                <p>{hashtag.name}</p>
+      <div className="hrefclass background">
+        <Link to='/'><h1>Go back to homepage</h1></Link>
+        <Link to='/addpost'><h1>Add post</h1></Link>
+      </div>
+      <div>
+        <div className="background">
+          {posts.map(item =>
+            <div key={item.id} id={item.id} className="separator">
+              <p className="postname">{item.title}</p>
+              <Link to="/posts" onClick={openInNewTab}><img src={item.image} /></Link>
+              <p className="posttext">{item.text}</p>
+              <p className="hidden">{item.owner.id}</p>
+              <div className="hashtags">
+                {item.hashtags.map(hashtag =>
+                  <div className="onehashtag" key={hashtag.id}>
+                    <p># {hashtag.name} </p>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div>
-            {(item.owner.id === userId) ? <button className="bigred" onClick={deleteConfirm} id={item.id}>delete</button> : null}
-            {(item.owner.id === userId) ? <button className="bigred" onClick={editPost} id={item.id + ',' + item.owner.id}>edit</button> : null}
-          </div>
-          <div>
-            {item.comments.reverse().map(comment =>
-              <div key={comment.id}>
-                <h3>{comment.owner.username}:</h3>
-                <img src={comment.owner.profile_image} className='profile_image'></img>
-                <h4>commented on {comment.created_at.replace('T', ' at ').slice(0, 22)}:</h4>
-                <p>{comment.text}</p>
-                <div>
-                  {comment.image.length === 0 ?
-                    <br></br>
-                    :
-                    <>
-                      <p>Attached image:</p>
-                      <img src={comment.image} />
-                    </>
-                  }
-                </div>
-                <div>
-                  {(comment.owner.id === userId) ? <button onClick={deleteComment} id={comment.id}>Delete this comment</button> : null}
-                </div>
+              {(item.owner.id === userId) ? <p className="nothappy">Not really happy about your post?</p> : null}
+              <div className="pairbuttons">
+                {(item.owner.id === userId) ? <button className="bigred" onClick={deleteConfirm} id={item.id}>Delete this post</button> : null}
+                {(item.owner.id === userId) ? <button className="bigred" onClick={editPost} id={item.id + ',' + item.owner.id}>Edit this post</button> : null}
               </div>
-            )}
-          </div>
-          {userIsAuthenticated() ?
-            <>
               <div>
-                <form onSubmit={addComment} onMouseOver={setToStorage} id={item.id}>
-                  <div>
-                    <label onMouseOver={setToStorage} id={item.id}>Type in your comment</label>
-                    <input onMouseOver={setToStorage} id={item.id}
-                      onChange={handleChange}
-                      type="text"
-                      name="text"
-                      placeholder="Enter your comment"
-                      value={comment.text}
-                      required
-                    />
+                {item.comments.reverse().map(comment =>
+                  <div key={comment.id} className="commentdiv">
+                    <div className="commentheader">
+                      <img src={comment.owner.profile_image} className='profile_image'></img>
+                      <h5>{comment.owner.username} added comment to that post on {comment.created_at.replace('T', ' at ').slice(0, 22)}</h5>
+                    </div>
+                    <p className="commentheader">{comment.text}</p>
+
+                    <div>
+                      {comment.image.length === 0 ?
+                        null
+                        :
+                        <>
+                          <img className="commentimage" src={comment.image} />
+                        </>
+                      }
+                    </div>
+                    <div className="pairbuttons">
+                      {(comment.owner.id === userId) ? <button onClick={deleteComment} id={comment.id} className="deletecomment">Delete this comment</button> : null}
+                    </div>
                   </div>
-                  <div>
-                    <label onMouseOver={setToStorage} id={item.id}>Add an image, if you prefer.</label>
-                    <input onMouseOver={setToStorage} id={item.id}
-                      onChange={handleChange}
-                      type="url"
-                      name="image"
-                      placeholder="Optional"
-                      value={comment.image}
-                    />
-                  </div>
-                  <button type="submit" onMouseOver={setToStorage} id={item.id}>Leave your comment</button>
-                </form>
+                )}
               </div>
-            </>
-            :
-            <Link to="/login"><button>Login to comment</button></Link>
-          }
+              {userIsAuthenticated() ?
+                <>
+                  <div>
+                    <form onSubmit={addComment} onMouseOver={setToStorage} id={item.id}>
+                      <div>
+                        <label onMouseOver={setToStorage} id={item.id} className="commenttextlabel">Add a comment:</label>
+                        <textarea onMouseOver={setToStorage} id={item.id} className="commenttextinput"
+                          onChange={handleChange}
+                          type="textarea"
+                          name="text"
+                          placeholder="Type in your comment here"
+                          value={comment.text}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label onMouseOver={setToStorage} id={item.id}>Add an image, if you prefer.</label>
+                        <input onMouseOver={setToStorage} id={item.id}
+                          onChange={handleChange}
+                          type="url"
+                          name="image"
+                          placeholder="Optional"
+                          value={comment.image}
+                        />
+                      </div>
+                      <div className="pairbuttons">
+                        <button type="submit" onMouseOver={setToStorage} id={item.id}>Leave your comment</button>
+                      </div>
+                    </form>
+                  </div>
+                </>
+                :
+                <Link to="/login"><button>Login to comment</button></Link>
+              }
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </>
   )
 
