@@ -42,11 +42,9 @@ const AddPost = () => {
           headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
         }
       )
-      console.log(getTokenFromLocalStorage)
       history.push('/posts')
     } catch (error) {
       console.log(error.message)
-      console.log(getTokenFromLocalStorage)
     }
   }
 
@@ -59,7 +57,7 @@ const AddPost = () => {
 
   const [search, setSearch] = useState('')
   const [noSearch] = useState([])
-  const [formdataHashtags] = useState([])
+  const [formdataHashtags, setFormdataHashtags] = useState([])
 
   const handleSearch = (event) => {
     setSearch(event.target.value)
@@ -67,19 +65,26 @@ const AddPost = () => {
 
   const addHashtagToFormdata = (event) => {
     event.preventDefault()
-    console.log(event.target)
-    console.log(event.target.innerText)
     formdata.hashtags.push(parseFloat(event.target.id))
     formdataHashtags.push(event.target.innerText)
-    console.log(formdataHashtags)
-    console.log(formdata)
-    console.log
-    console.log(formdata.hashtags)
+    formdataHashtags.push(event.target.id)
     clearSearchField()
     document.getElementById('hashtag-input-id').value = ' '
   }
   const clearSearchField = () => {
     setSearch('')
+  }
+
+  const removeHashtag = (event) => {
+    console.log(event.target)
+    const index = formdataHashtags.indexOf(event.target.innerText)
+    const indexToDelete = formdataHashtags[index + 1]
+    const deleteHashtagAtIndex = formdata.hashtags.indexOf(indexToDelete)
+    formdata.hashtags.splice(deleteHashtagAtIndex, 2)
+    event.target.classList.add('hidden')
+    if (formdata.hashtags.length === 0) {
+      setFormdataHashtags([])
+    }
   }
   return (
     <>
@@ -126,7 +131,7 @@ const AddPost = () => {
               if (item.name.toLowerCase().includes(search.trim().toLowerCase())) {
                 return (
                   <li key={item.id} id={item.id}>
-                    <button onClick={addHashtagToFormdata}><p id={item.id}>{item.name}</p></button>
+                    <button onClick={addHashtagToFormdata} id={item.id}>{item.name}</button>
                   </li>
                 )
               }
@@ -135,8 +140,12 @@ const AddPost = () => {
         </div>
         <div>
           <ul>
-            {formdataHashtags.length === 0 ? null : <div>Added hashtags: {formdataHashtags.map((item, index) => {
-              return <li key={index}>{item}</li>
+            {formdataHashtags.length === 0 ? null : <div>Added hashtags (click to remove): {formdataHashtags.map((item, index) => {
+              return (
+                <>
+                  <li key={index} onClick={removeHashtag}>{item}</li>
+                </>
+              )
             })}</div>}
           </ul>
         </div>

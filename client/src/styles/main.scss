@@ -15,7 +15,11 @@ ul {
   li {
     margin: 2px;
     display: inline-block;
+    
   }
+}
+li:nth-child(even) {
+  display: none ;
 }
 
 .hidden {
@@ -23,6 +27,6 @@ ul {
 }
 
 .bigred {
-  min-height: 400px;
+  min-width: 400px;
   color: red;
 }
