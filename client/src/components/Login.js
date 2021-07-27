@@ -44,7 +44,7 @@ const Login = () => {
     <>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Post title</label>
+          <label>Email address</label>
           <input
             onChange={handleChange}
             type="email"
@@ -65,7 +65,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit">Log in</button>
+        <button type="submit" className="commentbutton">Log in</button>
         {!errors ? <p></p> : <p style={{ color: 'red' }}>Something went wrong, double check your credentials.</p>}
       </form>
     </>

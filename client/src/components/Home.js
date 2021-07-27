@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { userIsAuthenticated } from './authentication/authentication'
+import FrontPagePart from './FrontPagePart'
 
 const Home = () => {
 
@@ -20,14 +21,20 @@ const Home = () => {
     <>
       {!userIsAuthenticated() ?
         <>
-          <Link to="/login"><h1>Login</h1></Link>
-          <Link to="/register"><h1>Register</h1></Link>
-          <Link to="/posts"><h1>Continue as guest</h1></Link>
+          <div className="frontpagenav">
+            <Link to="/login"><h3>Login</h3></Link>
+            <Link to="/register"><h3>Register</h3></Link>
+            <Link to="/posts"><h3>Continue as guest</h3></Link>
+          </div>
+          <FrontPagePart/>
         </>
         :
         <>
-          <Link onClick={handleLogout}><h1>Logout</h1></Link>
-          <Link to="/posts"><h1>See all posts</h1></Link>
+          <div className="frontpagenav">
+            <Link onClick={handleLogout}><h3>Logout</h3></Link>
+            <Link to="/posts"><h3>See all posts</h3></Link>
+          </div>
+          <FrontPagePart/>
         </>
       }
     </>

@@ -4,7 +4,7 @@ img {
 }
 
 .profile_image {
-  max-width: 15vw;
+  max-width: 10vw;
 }
 
 ul {
@@ -35,7 +35,7 @@ li:nth-child(even) {
 * {
   display: flex;
   flex-direction: column;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 * button{
   transition: transform 0.2s ease-in-out;
@@ -58,6 +58,7 @@ head {
 a {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .hashtags {
@@ -72,7 +73,7 @@ a {
 }
 
 .posttext {
-  margin: 5vw 5vw 5vw 5vw;
+  margin-top: 2vh;
 }
 
 .onehashtag {
@@ -93,6 +94,7 @@ p {
   align-items: center;
   font-size: 5vw;
   font-weight: bolder;
+  text-align: center;
 }
 
 .pairbuttons {
@@ -114,11 +116,13 @@ p {
 .commentimage {
   display: flex;
   align-self: center;
+  width: 15vw;
+  margin-bottom: 1vw;
 }
 .commentheader {
   display: flex;
   flex-direction: row;
-  margin: 2vw 5vw 2vw 5vw;
+  margin: 2vw 5vw 0vw 5vw;
   justify-content: space-around;
   img, h5 {
     margin: 1vw;
@@ -131,9 +135,10 @@ p {
 }
 
 .commentdiv {
-  border: 1px solid black;
+  border: 1px solid grey;
   margin: 2vw;
   border-radius: 20px;
+  box-shadow: inset 2vw 1vw rgb(90, 154, 92);
 }
 
 .nothappy {
@@ -148,14 +153,14 @@ p {
 }
 
 .separator {
-  border: 4px solid grey;
+  border: 2px solid grey;
   border-radius: 20px;
   margin: 1vw 3vw 1vw 3vw;
 }
 
 .commenttextinput {
   width: 75vw;
-  height: 15vw;
+  height: 8vw;
   align-self: center;
 }
 
@@ -164,3 +169,57 @@ p {
   height: 4vh;
   align-self: center;
 }
+.commentheadertext {
+  align-items: center;
+  margin: 0;
+}
+
+.commentheadertextwrap {
+  margin: 1vw 3vw 1vw 3vw;
+}
+
+// .column {
+//   width: 80%;
+// }
+
+.commentbutton {
+  width: 25vw;
+  align-items: center;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  align-self: center;
+  border: none;
+  background-color: rgb(172, 142, 191);
+  color: white;
+  border-radius: 5px;
+  justify-content: center;
+  height: 3.5vh;
+}
+
+@media screen and (min-width: 940px) {
+  * {
+
+  }
+}
+
+.frontpageimage {
+  align-items: center;
+    align-self: center;
+    width: 30vw;
+    border-radius: 210px;
+}
+
+.frontpagetext {
+  text-align: center;
+}
+
+.frontpagenav {
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: rgb(172, 142, 191);
+  margin-bottom: 2vh;
+  border-radius: 5px;
+  h3 {
+    color:white;
+  }
+} 
