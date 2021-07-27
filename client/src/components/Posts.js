@@ -131,10 +131,9 @@ const Posts = () => {
     setFilteredPosts(filteredPostsArray)
   }
 
-  const savedPosts = []
+  const [savedPosts, setSavedPosts] = useState([])
 
   const savePost = (event) => {
-    event.preventDefault()
     if (!savedPosts.find((item => item.id === parseInt(event.target.id)))) {
       savedPosts.push((posts.find(item => item.id === parseInt(event.target.id))))
     } else {
@@ -142,6 +141,19 @@ const Posts = () => {
     }
   }
 
+  const [savedCount, setSavedCount] = useState(0)
+
+  const seeSaved = () => {
+    setSavedCount(savedCount => savedCount + 1)
+    setPosts(savedPosts)
+  }
+
+  const backLikeItWas = () => {
+
+    setSavedPosts(posts)
+    setPosts(postsBackup)
+    setSavedCount(savedCount => savedCount - 1)
+  }
   return (
     <>
       <div className="row">
@@ -149,6 +161,7 @@ const Posts = () => {
           <Link to='/'><h1>Go back to homepage</h1></Link>
           <Link to='/addpost'><h1>Add post</h1></Link>
           <input type="text" placeholder="Look up for post" onChange={searchForPost} />
+          {savedCount > 0 ? <button onClick={backLikeItWas}>Back</button> : <button onClick={seeSaved}>See saved</button>}
         </div>
         <div>
           <div className="background">
