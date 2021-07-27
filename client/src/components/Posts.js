@@ -6,7 +6,7 @@ import { getTokenFromLocalStorage } from './authentication/authentication'
 
 
 const Posts = () => {
-
+  
   const history = useHistory()
   const [count, setCount] = useState(0)
   const [posts, setPosts] = useState([])
@@ -19,7 +19,6 @@ const Posts = () => {
       data.sort().reverse()
       setPosts(data)
       setPostsBackup(data)
-
     }
     getData()
     getPayload()
@@ -39,6 +38,7 @@ const Posts = () => {
     const id = (JSON.parse(atob(parts[1])))
     setUserId(id.sub)
     return JSON.parse(atob(parts[1]))
+    
   }
 
   const deleteConfirm = async (event) => {
@@ -89,7 +89,6 @@ const Posts = () => {
   const handleChange = (event) => {
     event.preventDefault()
     const newComment = { ...comment, [event.target.name]: event.target.value, owner: userId, post: parseFloat(postId) }
-    console.log(event.target.name)
     console.log(newComment)
     setComment(newComment)
   }
@@ -131,19 +130,26 @@ const Posts = () => {
     setFilteredPosts(filteredPostsArray)
   }
 
-  const [savedPosts, setSavedPosts] = useState([])
+  const [savedPosts, setSavedPosts] = useState(JSON.parse(localStorage.getItem('posts')))
 
   const savePost = (event) => {
+    
     if (!savedPosts.find((item => item.id === parseInt(event.target.id)))) {
       savedPosts.push((posts.find(item => item.id === parseInt(event.target.id))))
+      window.localStorage.setItem('posts', JSON.stringify(savedPosts))
+      window.localStorage.setItem('postsCopy', JSON.stringify(savedPosts))
+      setCount(count => count + 1)
     } else {
       console.log('already in')
+      const storedPosts = JSON.parse(localStorage.getItem('posts'))
+      console.log(storedPosts)
     }
   }
 
   const [savedCount, setSavedCount] = useState(0)
 
   const seeSaved = () => {
+    setSavedPosts(JSON.parse(localStorage.getItem('posts')))
     setSavedCount(savedCount => savedCount + 1)
     setPosts(savedPosts)
   }
@@ -154,6 +160,17 @@ const Posts = () => {
     setPosts(postsBackup)
     setSavedCount(savedCount => savedCount - 1)
   }
+
+  const unsavePost = (event) => {
+    const storedPosts = JSON.parse(localStorage.getItem('postsCopy'))
+    const storedPostsWithoutUnsavedPost = storedPosts.filter(item => item.id !== parseInt(event.target.id))
+    window.localStorage.setItem('posts', JSON.stringify(storedPostsWithoutUnsavedPost))
+    const storedPostsAfterUpdate = JSON.parse(localStorage.getItem('posts'))
+    setSavedPosts(savedPosts.filter(item => item.id !== parseInt(event.target.id)))
+    setSavedPosts(storedPostsAfterUpdate)
+    setCount(count => count + 1)
+    setSavedCount(savedCount => savedCount - 1)
+  }
   return (
     <>
       <div className="row">
@@ -161,7 +178,7 @@ const Posts = () => {
           <Link to='/'><h1>Go back to homepage</h1></Link>
           <Link to='/addpost'><h1>Add post</h1></Link>
           <input type="text" placeholder="Look up for post" onChange={searchForPost} />
-          {savedCount > 0 ? <button onClick={backLikeItWas}>Back</button> : <button onClick={seeSaved}>See saved</button>}
+          {savedCount > 0 ? <button onClick={backLikeItWas} className="commentbutton">See all posts</button> : <button className="commentbutton" onClick={seeSaved}>See saved posts</button>}
         </div>
         <div>
           <div className="background">
@@ -169,16 +186,18 @@ const Posts = () => {
               <div key={item.id} id={item.id} className="separator">
                 <p className="postname">{item.title}</p>
                 <p>{item.created_at.replace('T', ' at ').slice(0, 22)}</p>
-                <p onClick={savePost} id={item.id}>Like it? Save it! Click to save</p>
                 <Link to="/posts" onClick={openInNewTab}><img src={item.image} alt="imageofpost" /></Link>
                 <p className="posttext">{item.text}</p>
                 <div className="hashtags">
-                  {item.hashtags.map(hashtag =>
+                  {item.hashtags.map(hashtag => 
                     <div className="onehashtag" key={hashtag.id}>
                       <p># {hashtag.name} </p>
                     </div>
                   )}
+                  {savedPosts.some(thing => thing.id === item.id) ? <p>❤️ You saved this post</p> : null}
                 </div>
+                
+                {savedPosts.some(thing => thing.id === item.id) ? <button onClick={unsavePost} id={item.id} className="commentbutton">Fed up? Dislike!</button> : <button onClick={savePost} id={item.id} className="commentbutton">Like it? Save it!</button>}
                 {(item.owner.id === userId) ? <p className="nothappy">Not really happy about your post?</p> : null}
                 <div className="pairbuttons">
                   {(item.owner.id === userId) ? <button className="bigred" onClick={deleteConfirm} id={item.id}>Delete this post</button> : null}

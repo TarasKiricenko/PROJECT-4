@@ -4,6 +4,15 @@ import { userIsAuthenticated } from './authentication/authentication'
 import FrontPagePart from './FrontPagePart'
 
 const Home = () => {
+  
+  const posts = window.localStorage.getItem('posts')
+  console.log(posts)
+  if (!posts) {
+    const posts = []
+    window.localStorage.setItem('posts', JSON.stringify(posts))
+  } else {
+    null
+  }
 
   const history = useHistory()
 
