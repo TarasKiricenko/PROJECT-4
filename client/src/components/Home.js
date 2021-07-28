@@ -20,6 +20,7 @@ const Home = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('token')
+    window.localStorage.removeItem('posts')
     history.push('/')
   }
 
@@ -40,7 +41,7 @@ const Home = () => {
         :
         <>
           <div className="frontpagenav">
-            <Link onClick={handleLogout}><h3>Logout</h3></Link>
+            <Link to='/' onClick={handleLogout}><h3>Logout</h3></Link>
             <Link to="/posts"><h3>See all posts</h3></Link>
           </div>
           <FrontPagePart/>

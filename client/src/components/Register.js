@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const Register = () => {
 
@@ -25,6 +26,7 @@ const Register = () => {
     last_name: '',
     profile_image: '',
   }, [])
+  console.log(errors)
 
   const handleChange = (event) => {
     const newFormData = { ...formdata, [event.target.name]: event.target.value }
@@ -38,16 +40,21 @@ const Register = () => {
       await axios.post('/api/jwt_auth/register/', formdata)
       window.alert('Registration successful!')
       history.push('/login')
-    } catch (err) {
-      setErrors(err.response.data.errors)
+    } catch (error) {
+      console.log(error.username)
+      setErrors(error.response.data.data)
     }
   }
   return (
     <>
+      <div className="frontpagenav">
+        <Link to='/'><h3>Go back to homepage</h3></Link>
+        <Link to='/posts'><h3>See all posts</h3></Link>
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Username</label>
-          <input
+          <label className="commenttextlabel">Username</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="username"
             name="username"
@@ -55,10 +62,11 @@ const Register = () => {
             value={formdata.username}
             required
           />
+          {errors ? <p></p> : <p style={{ color: 'red' }} className="loginregistererror">This username might have been taken</p>}
         </div>
         <div>
-          <label>Email address</label>
-          <input
+          <label className="commenttextlabel">Email address</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="email"
             name="email"
@@ -66,10 +74,11 @@ const Register = () => {
             value={formdata.email}
             required
           />
+          {errors ? <p></p> : <p style={{ color: 'red' }} className="loginregistererror">This email might have been used</p>}
         </div>
         <div>
-          <label>Fisrt name</label>
-          <input
+          <label className="commenttextlabel">Fisrt name</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="text"
             name="first_name"
@@ -79,8 +88,8 @@ const Register = () => {
           />
         </div>
         <div>
-          <label>Last name</label>
-          <input
+          <label className="commenttextlabel">Last name</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="text"
             name="last_name"
@@ -90,8 +99,8 @@ const Register = () => {
           />
         </div>
         <div>
-          <label>Profile picture URL</label>
-          <input
+          <label className="commenttextlabel">Profile picture URL</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="url"
             name="profile_image"
@@ -101,8 +110,8 @@ const Register = () => {
           />
         </div>
         <div>
-          <label>Password</label>
-          <input
+          <label className="commenttextlabel">Password</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="password"
             name="password"
@@ -112,8 +121,8 @@ const Register = () => {
           />
         </div>
         <div>
-          <label>Confirm passowrd</label>
-          <input
+          <label className="commenttextlabel">Confirm passowrd</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="password"
             name="password_confirmation"
@@ -121,9 +130,12 @@ const Register = () => {
             value={formdata.password_confirmation}
             required
           />
-          {errors ? <p></p> : <p style={{ color: 'red' }}>Something wrong, double check your passwords</p>}
+          {errors ? <p></p> : <p style={{ color: 'red' }} className="loginregistererror">Something wrong, double check your passwords</p>}
         </div>
-        <button type="submit">Register</button>
+        <div className="pairbuttons">
+          <button type="submit" className="deletecomment shadow">Register</button>
+        </div>
+
       </form>
     </>
   )

@@ -6,7 +6,7 @@ import { getTokenFromLocalStorage } from './authentication/authentication'
 
 
 const Posts = () => {
-  
+
   const history = useHistory()
   const [count, setCount] = useState(0)
   const [posts, setPosts] = useState([])
@@ -17,6 +17,7 @@ const Posts = () => {
       const { data } = await axios.get('/api/posts')
       console.log(data)
       data.sort().reverse()
+      data.map(item => delete item.owner['email'])
       setPosts(data)
       setPostsBackup(data)
     }
@@ -38,7 +39,7 @@ const Posts = () => {
     const id = (JSON.parse(atob(parts[1])))
     setUserId(id.sub)
     return JSON.parse(atob(parts[1]))
-    
+
   }
 
   const deleteConfirm = async (event) => {
@@ -69,11 +70,9 @@ const Posts = () => {
     try {
       await axios.post('api/comments/',
         comment
-        // {
-        //   headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
-        // }
       )
       history.push('/posts')
+      clearCommentFields()
       setCount(count => count - 1)
     } catch (error) {
       console.log(error)
@@ -87,7 +86,7 @@ const Posts = () => {
   const postId = window.localStorage.getItem('id')
 
   const handleChange = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     const newComment = { ...comment, [event.target.name]: event.target.value, owner: userId, post: parseFloat(postId) }
     console.log(newComment)
     setComment(newComment)
@@ -124,16 +123,18 @@ const Posts = () => {
   const [filteredPosts, setFilteredPosts] = useState([])
   const searchForPost = (event) => {
     const filteredPostsArray = posts.filter(item => {
-      const hashtagsArray = item.hashtags.map(item => item.name).toString()
-      return (item.title.toLowerCase().includes(event.target.value.toLowerCase()) || hashtagsArray.toLowerCase().includes(event.target.value.toLowerCase()))
+      const hashtagsArray = item.hashtags.map(item => item.name).toString().replace(/,/g, '').replace(/_/g, '')
+      setSavedCount(savedCount => savedCount + 1)
+      return (item.title.toLowerCase().replace(/,/g, '').replace(/_/g, '').includes((event.target.value.toLowerCase()).replace(/,/g, '').replace(/_/g, '')) || hashtagsArray.toLowerCase().includes(event.target.value.toLowerCase()))
     })
+    console.log(filteredPostsArray)
     setFilteredPosts(filteredPostsArray)
   }
 
   const [savedPosts, setSavedPosts] = useState(JSON.parse(localStorage.getItem('posts')))
 
   const savePost = (event) => {
-    
+
     if (!savedPosts.find((item => item.id === parseInt(event.target.id)))) {
       savedPosts.push((posts.find(item => item.id === parseInt(event.target.id))))
       window.localStorage.setItem('posts', JSON.stringify(savedPosts))
@@ -155,14 +156,13 @@ const Posts = () => {
   }
 
   const backLikeItWas = () => {
-
     setSavedPosts(posts)
     setPosts(postsBackup)
     setSavedCount(savedCount => savedCount - 1)
   }
 
   const unsavePost = (event) => {
-    const storedPosts = JSON.parse(localStorage.getItem('postsCopy'))
+    const storedPosts = JSON.parse(localStorage.getItem('posts'))
     const storedPostsWithoutUnsavedPost = storedPosts.filter(item => item.id !== parseInt(event.target.id))
     window.localStorage.setItem('posts', JSON.stringify(storedPostsWithoutUnsavedPost))
     const storedPostsAfterUpdate = JSON.parse(localStorage.getItem('posts'))
@@ -171,44 +171,70 @@ const Posts = () => {
     setCount(count => count + 1)
     setSavedCount(savedCount => savedCount - 1)
   }
+
+  const handleLogout = () => {
+    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('posts')
+    history.push('/')
+  }
+
+  const clearCommentFields = () => {
+    setComment({
+      post: '',
+      text: '',
+      image: '',
+      owner: '',
+    })
+  }
   return (
     <>
       <div className="row">
         <div className="hrefclass background">
-          <Link to='/'><h1>Go back to homepage</h1></Link>
-          <Link to='/addpost'><h1>Add post</h1></Link>
-          <input type="text" placeholder="Look up for post" onChange={searchForPost} />
-          {savedCount > 0 ? <button onClick={backLikeItWas} className="commentbutton">See all posts</button> : <button className="commentbutton" onClick={seeSaved}>See saved posts</button>}
+          <div className="frontpagenav">
+            <Link to='/'><h3>Go back to homepage</h3></Link>
+            {userIsAuthenticated() ?
+              <>
+                <Link to='/addpost'><h3>Add post</h3></Link>
+                <Link to='/' onClick={handleLogout}><h3>Logout</h3></Link>
+              </>
+              :
+              <Link to='/login'><h3>Login</h3></Link>
+            }
+          </div>
+          <div className="">
+            <input type="text" placeholder="Look up for post" onChange={searchForPost} className="background shadow commenturl" />
+            {userIsAuthenticated() ? (savedCount > 0 ? <button onClick={backLikeItWas} className="commentbutton shadow">See all posts</button> : <button className="commentbutton shadow" onClick={seeSaved}>See saved posts</button>) : null}
+          </div>
         </div>
         <div>
           <div className="background">
             {((filteredPosts.length > 0 ? filteredPosts : posts)).map(item =>
-              <div key={item.id} id={item.id} className="separator">
+              <div key={item.id} id={item.id} className="separator shadow">
                 <p className="postname">{item.title}</p>
                 <p>{item.created_at.replace('T', ' at ').slice(0, 22)}</p>
-                <Link to="/posts" onClick={openInNewTab}><img src={item.image} alt="imageofpost" /></Link>
+                <Link to="/posts" onClick={openInNewTab}><img src={item.image} alt="imageofpost" className="shadow" /></Link>
                 <p className="posttext">{item.text}</p>
                 <div className="hashtags">
-                  {item.hashtags.map(hashtag => 
-                    <div className="onehashtag" key={hashtag.id}>
-                      <p># {hashtag.name} </p>
+                  {item.hashtags.map(hashtag =>
+                    <div className="onehashtag shadow" key={hashtag.id}>
+                      <p ># {hashtag.name} </p>
                     </div>
                   )}
                   {savedPosts.some(thing => thing.id === item.id) ? <p>❤️ You saved this post</p> : null}
                 </div>
-                
-                {savedPosts.some(thing => thing.id === item.id) ? <button onClick={unsavePost} id={item.id} className="commentbutton">Fed up? Dislike!</button> : <button onClick={savePost} id={item.id} className="commentbutton">Like it? Save it!</button>}
+
+                {userIsAuthenticated() ? (savedPosts.some(thing => thing.id === item.id) ? <button onClick={unsavePost} id={item.id} className="commentbutton shadow">Fed up? Dislike!</button> : <button onClick={savePost} id={item.id} className="commentbutton shadow">Like it? Save it!</button>) : null}
                 {(item.owner.id === userId) ? <p className="nothappy">Not really happy about your post?</p> : null}
                 <div className="pairbuttons">
-                  {(item.owner.id === userId) ? <button className="bigred" onClick={deleteConfirm} id={item.id}>Delete this post</button> : null}
-                  {(item.owner.id === userId) ? <button className="bigred" onClick={editPost} id={item.id + ',' + item.owner.id}>Edit this post</button> : null}
+                  {(item.owner.id === userId) ? <button className="bigred shadow" onClick={deleteConfirm} id={item.id}>Delete this post</button> : null}
+                  {(item.owner.id === userId) ? <button className="bigred shadow" onClick={editPost} id={item.id + ',' + item.owner.id}>Edit this post</button> : null}
                 </div>
-                <div id={item.index}><button className="commentbutton" onClick={displayComments}>See comments</button>{showComments === true ?
+                <div id={item.index}><button className="commentbutton shadow" onClick={displayComments}>See comments</button>{showComments === true ?
                   <div>
                     {item.comments.map(comment =>
-                      <div key={comment.id} className="commentdiv">
+                      <div key={comment.id} className="commentdiv shadow">
                         <div className="commentheader">
-                          <img src={comment.owner.profile_image} className='profile_image' alt='profileimage'></img>
+                          <img src={comment.owner.profile_image} className='profile_image shadow' alt='profileimage'></img>
                           <h5>{comment.owner.username} added comment to that post on {comment.created_at.replace('T', ' at ').slice(0, 22)}</h5>
                         </div>
                         <div className="commentheadertextwrap">
@@ -224,17 +250,17 @@ const Posts = () => {
                           }
                         </div>
                         <div className="pairbuttons">
-                          {(comment.owner.id === userId) ? <button onClick={deleteComment} id={comment.id} className="deletecomment">Delete this comment</button> : null}
+                          {(comment.owner.id === userId) ? <button onClick={deleteComment} id={comment.id} className="deletecomment shadow">Delete this comment</button> : null}
                         </div>
                       </div>
                     )}
                     {userIsAuthenticated() ?
                       <>
                         <div>
-                          <form onSubmit={addComment} onMouseOver={setToStorage} id={item.id}>
+                          <form onSubmit={addComment}>
                             <div>
-                              <label onMouseOver={setToStorage} id={item.id} className="commenttextlabel">Add a comment:</label>
-                              <textarea onMouseOver={setToStorage} id={item.id} className="commenttextinput"
+                              <label className="commenttextlabel">Add a comment:</label>
+                              <textarea onMouseOver={setToStorage} onClick={setToStorage} id={item.id} className="commenttextinput shadow"
                                 onChange={handleChange}
                                 type="textarea"
                                 name="text"
@@ -244,8 +270,8 @@ const Posts = () => {
                               />
                             </div>
                             <div>
-                              <label onMouseOver={setToStorage} id={item.id} className="commenttextlabel">Add an image, if you prefer.</label>
-                              <input onMouseOver={setToStorage} id={item.id}
+                              <label className="commenttextlabel">Add an url for an image to be attached, if you prefer:</label>
+                              <input className="shadow commenturl"
                                 onChange={handleChange}
                                 type="url"
                                 name="image"
@@ -254,13 +280,13 @@ const Posts = () => {
                               />
                             </div>
                             <div className="pairbuttons">
-                              <button type="submit" onMouseOver={setToStorage} id={item.id}>Leave your comment</button>
+                              <button type="submit" className="shadow">Leave your comment</button>
                             </div>
                           </form>
                         </div>
                       </>
                       :
-                      <Link to="/login"><button className="commentbutton">Login to comment</button></Link>
+                      <Link to="/login"><button className="commentbutton shadow">Login to comment</button></Link>
                     }
                   </div>
                   :
@@ -278,37 +304,3 @@ const Posts = () => {
 
 }
 export default Posts
-// {userIsAuthenticated() ?
-//   <>
-//     <div>
-//       <form onSubmit={addComment} onMouseOver={setToStorage} id={item.id}>
-//         <div>
-//           <label onMouseOver={setToStorage} id={item.id} className="commenttextlabel">Add a comment:</label>
-//           <textarea onMouseOver={setToStorage} id={item.id} className="commenttextinput"
-//             onChange={handleChange}
-//             type="textarea"
-//             name="text"
-//             placeholder="Type in your comment here"
-//             value={comment.text}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label onMouseOver={setToStorage} id={item.id} className="commenttextlabel">Add an image, if you prefer.</label>
-//           <input onMouseOver={setToStorage} id={item.id}
-//             onChange={handleChange}
-//             type="url"
-//             name="image"
-//             placeholder="Optional"
-//             value={comment.image}
-//           />
-//         </div>
-//         <div className="pairbuttons">
-//           <button type="submit" onMouseOver={setToStorage} id={item.id}>Leave your comment</button>
-//         </div>
-//       </form>
-//     </div>
-//   </>
-//   :
-//   <Link to="/login"><button>Login to comment</button></Link>
-// }

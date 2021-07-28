@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   const history = useHistory()
@@ -42,10 +43,14 @@ const Login = () => {
   
   return (
     <>
+      <div className="frontpagenav">
+        <Link to='/'><h3>Go back to homepage</h3></Link>
+        <Link to='/posts'><h3>Continue as guest</h3></Link>
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email address</label>
-          <input
+          <label className="commenttextlabel">Email address</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="email"
             name="email"
@@ -55,8 +60,8 @@ const Login = () => {
           />
         </div>
         <div>
-          <label>Password</label>
-          <input
+          <label className="commenttextlabel">Password</label>
+          <input className="commenturl shadow"
             onChange={handleChange}
             type="password"
             name="password"
@@ -65,7 +70,10 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="commentbutton">Log in</button>
+        <div className="pairbuttons">
+          <button type="submit" className="deletecomment shadow">Log in</button>
+        </div>
+        
         {!errors ? <p></p> : <p style={{ color: 'red' }}>Something went wrong, double check your credentials.</p>}
       </form>
     </>
