@@ -11,19 +11,30 @@ const Posts = () => {
   const [count, setCount] = useState(0)
   const [posts, setPosts] = useState([])
   const [postsBackup, setPostsBackup] = useState([])
+  const [render, setRender] = useState(false)
+
+  const setToStorage = (event) => {
+    window.localStorage.setItem('id', event.target.id)
+  }
+  const postId = window.localStorage.getItem('id')
 
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get('/api/posts')
-      console.log(data)
       data.sort().reverse()
       data.map(item => delete item.owner['email'])
+      data.map(item => item.comments.map(item => delete item.owner['email']))
+      console.log(data)
       setPosts(data)
       setPostsBackup(data)
     }
     getData()
     getPayload()
-  }, [count], [postsBackup])
+  }, [count])
+
+  useEffect(() => {
+    console.log('hi')
+  }, [render])
 
   const openInNewTab = (event) => {
     window.open(event.target.src, '_blank')
@@ -67,23 +78,22 @@ const Posts = () => {
 
   const addComment = async (event) => {
     event.preventDefault()
+    console.log('adding')
     try {
       await axios.post('api/comments/',
         comment
       )
       history.push('/posts')
+      console.log('added')
+      console.log(filteredPosts)
       clearCommentFields()
+      setRender(!render)
       setCount(count => count - 1)
     } catch (error) {
       console.log(error)
     }
 
   }
-
-  const setToStorage = (event) => {
-    window.localStorage.setItem('id', event.target.id)
-  }
-  const postId = window.localStorage.getItem('id')
 
   const handleChange = (event) => {
     // event.preventDefault()
@@ -101,13 +111,17 @@ const Posts = () => {
 
   const deleteComment = async (event) => {
     console.log(event.target.id)
-    event.preventDefault()
+    // event.preventDefault()
+    console.log('deleting')
     try {
       await axios.delete(`api/comments/${event.target.id}`)
-      setCount(count => count + 1)
+      // console.log(filteredPosts)
+      setRender(!render)
+      // setCount(count => count + 1)
     } catch (error) {
       console.log(error)
     }
+    setCount(count => count + 1)
   }
 
   const [showComments, setShowComments] = useState(false)
@@ -120,15 +134,16 @@ const Posts = () => {
       setShowComments(!showComments)
     }
   }
+
   const [filteredPosts, setFilteredPosts] = useState([])
+  
   const searchForPost = (event) => {
-    const filteredPostsArray = posts.filter(item => {
+    const searchArray = posts.filter(item => {
       const hashtagsArray = item.hashtags.map(item => item.name).toString().replace(/,/g, '').replace(/_/g, '')
       setSavedCount(savedCount => savedCount + 1)
       return (item.title.toLowerCase().replace(/,/g, '').replace(/_/g, '').includes((event.target.value.toLowerCase()).replace(/,/g, '').replace(/_/g, '')) || hashtagsArray.toLowerCase().includes(event.target.value.toLowerCase()))
     })
-    console.log(filteredPostsArray)
-    setFilteredPosts(filteredPostsArray)
+    setFilteredPosts(searchArray)
   }
 
   const [savedPosts, setSavedPosts] = useState(JSON.parse(localStorage.getItem('posts')))
@@ -140,10 +155,9 @@ const Posts = () => {
       window.localStorage.setItem('posts', JSON.stringify(savedPosts))
       window.localStorage.setItem('postsCopy', JSON.stringify(savedPosts))
       setCount(count => count + 1)
+      console.log
     } else {
-      console.log('already in')
-      const storedPosts = JSON.parse(localStorage.getItem('posts'))
-      console.log(storedPosts)
+      null
     }
   }
 
@@ -163,13 +177,16 @@ const Posts = () => {
 
   const unsavePost = (event) => {
     const storedPosts = JSON.parse(localStorage.getItem('posts'))
+    console.log(storedPosts)
     const storedPostsWithoutUnsavedPost = storedPosts.filter(item => item.id !== parseInt(event.target.id))
+    console.log(storedPostsWithoutUnsavedPost)
     window.localStorage.setItem('posts', JSON.stringify(storedPostsWithoutUnsavedPost))
     const storedPostsAfterUpdate = JSON.parse(localStorage.getItem('posts'))
+    console.log(storedPostsAfterUpdate)
+    console.log(savedPosts.filter(item => item.id !== parseInt(event.target.id)))
     setSavedPosts(savedPosts.filter(item => item.id !== parseInt(event.target.id)))
-    setSavedPosts(storedPostsAfterUpdate)
-    setCount(count => count + 1)
-    setSavedCount(savedCount => savedCount - 1)
+    // setSavedPosts(storedPostsAfterUpdate)
+    
   }
 
   const handleLogout = () => {

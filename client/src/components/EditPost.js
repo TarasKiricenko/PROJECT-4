@@ -10,7 +10,7 @@ const EditPost = () => {
   const idOfPost = parseFloat(idOfPostAndOwner)
   const ownerOfPost = (idOfPostAndOwner.split(','))
   const ownerOfPostId = parseFloat(ownerOfPost[1])
-  
+
   useEffect(() => {
     const getPostToEditById = async () => {
       try {
@@ -98,7 +98,7 @@ const EditPost = () => {
       }
     }
     formdataHashtags.push(event.target.innerText)
-    formdataHashtags.push(event.target.id)
+    // formdataHashtags.push(event.target.id)
     clearSearchField()
     document.getElementById('hashtag-input-id').value = ' '
   }
@@ -118,14 +118,20 @@ const EditPost = () => {
       setFormdataHashtags([])
     }
   }
+
+  const goBack = () => {
+    history.goBack()
+  }
   return (
     <>
-      <Link to='/'><h1>Go back to homepage</h1></Link>
-      <Link to='/posts'><h1>See all posts</h1></Link>
+      <div className="frontpagenav">
+        <Link to='/'><h3>Go back to homepage</h3></Link>
+        <Link to='/posts'><h3>See all posts</h3></Link>
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name your post</label>
-          <input
+          <label className="commenttextlabel">Give it another name:</label>
+          <input className="commenttextinput shadow commenturl"
             onChange={handleChange}
             type="text"
             name="title"
@@ -135,8 +141,8 @@ const EditPost = () => {
           />
         </div>
         <div>
-          <label>Add url for image to be attached</label>
-          <input
+          <label className="commenttextlabel">Would you like to change picture? Add another url:</label>
+          <input className="commenttextinput shadow commenturl"
             onChange={handleChange}
             type="url"
             name="image"
@@ -145,8 +151,8 @@ const EditPost = () => {
           />
         </div>
         <div>
-          <label>What your post is about?</label>
-          <input
+          <label className="commenttextlabel">What is it you would like to change?</label>
+          <textarea className="commenttextinput shadow"
             onChange={handleChange}
             type="textarea"
             name="text"
@@ -156,32 +162,33 @@ const EditPost = () => {
           />
         </div>
         <div>
-          <label>Add at least one hashtag:</label>
-          <input type="text" placeholder="Search for hashtags" onChange={handleSearch} id="hashtag-input-id" required />
-          <ul onChange={handleSearch}>
+          <label className="commenttextlabel">Add at least one hashtag:</label>
+          <input type="text" placeholder="Search for hashtags" onChange={handleSearch} id="hashtag-input-id" required className="commenturl shadow speciallist"  />
+          <div className="hashtags " onChange={handleSearch} >
             {(search === '' ? noSearch : hashtags).map(item => {
               if (item.name.toLowerCase().includes(search.trim().toLowerCase())) {
                 return (
-                  <li key={item.id} id={item.id}>
-                    <button onClick={addHashtagToFormdata} id={item.id}>{item.name}</button>
-                  </li>
+                  <div className="onehashtag shadow" key={item.id} id={item.id}>
+                    <p onClick={addHashtagToFormdata} id={item.id}># {item.name}</p>
+                  </div>
                 )
               }
             })}
-          </ul>
+          </div>
         </div>
         <div>
-          <ul>
-            {formdataHashtags.length === 0 ? null : <div>Added hashtags (click to remove): {formdataHashtags.map((item, index) => {
-              return (
-                <>
-                  <li key={index} onClick={removeHashtag}>{item}</li>
-                </>
-              )
-            })}</div>}
-          </ul>
+          <div className="hashtags">
+            {formdataHashtags.map(item =>
+              <div className="onehashtag shadow" key={item.id}>
+                <p onClick={removeHashtag}> {item} </p>
+              </div>
+            )}
+          </div>
         </div>
-        <button type="submit">Share your post</button>
+        <div className="pairbuttons">
+          <button type="submit" className="deletecomment shadow">Save and post</button>
+          <button type="button" className="deletecomment shadow" onClick={goBack}>Go back</button>
+        </div>
       </form>
     </>
   )
