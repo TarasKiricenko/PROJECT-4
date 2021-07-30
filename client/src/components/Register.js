@@ -45,6 +45,11 @@ const Register = () => {
       setErrors(error.response.data.data)
     }
   }
+
+  const goLogin = () => {
+    history.push('/login')
+  }
+
   return (
     <>
       <div className="frontpagenav">
@@ -134,6 +139,7 @@ const Register = () => {
         </div>
         <div className="pairbuttons">
           <button type="submit" className="deletecomment shadow">Register</button>
+          <button type="submit" className="deletecomment shadow" onClick={goLogin}>Been before? Login</button>
         </div>
 
       </form>

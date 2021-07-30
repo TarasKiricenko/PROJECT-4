@@ -77,6 +77,8 @@ const Posts2 = () => {
   // }
 
   const seeSavedPosts = () => {
+    setFilteredPosts([])
+    // document.getElementById('search').value = ''
     console.log('displaying saved')
     const postsFromStorage = JSON.parse(window.localStorage.getItem('posts'))
     console.log('post from local storage', postsFromStorage)
@@ -85,9 +87,7 @@ const Posts2 = () => {
     const actualPosts = posts.map(item => item)
     console.log('actual posts on state', actualPosts)
     
-
     const updatedPostToDisplay = posts.filter(item => item.id === parseInt(arrayOfStoredIds))
-
     console.log('actual post I need', updatedPostToDisplay)
     console.log(savedPosts)
     savedPosts.push(updatedPostToDisplay[0])
@@ -220,8 +220,10 @@ const Posts2 = () => {
   const searchForPost = (event) => {
     // console.log(event.target.value)
     const searchArray = posts.filter(item => {
-      // setCount(count => count + 1)
-      return (item.title.toLowerCase().replace(/_/g, '').includes(event.target.value))
+      // setCount(count => count + 1)onst hashtagsArray = item.hashtags.map(item => item.name).toString().replace(/,/g, '').replace(/_/g, '')
+      setSavedCount(savedCount => savedCount + 1)
+      return (item.title.toLowerCase().replace(/,/g, '').replace(/_/g, '').includes((event.target.value.toLowerCase()).replace(/,/g, '').replace(/_/g, '')) || item.hashtags.map(item => item.name).toString().toLowerCase().replace(/,/g, '').replace(/_/g, '').includes((event.target.value.toLowerCase()).replace(/,/g, '').replace(/_/g, '')))
+      // return (item.title.toLowerCase().replace(/_/g, '').includes(event.target.value))
     })
     console.log(searchArray)
     setFilteredPosts(searchArray)
@@ -231,60 +233,11 @@ const Posts2 = () => {
     setFilteredPosts([])
     document.getElementById('search').value = ''
   }
-  // const [filteredPosts, setFilteredPosts] = useState([])
 
-  // const searchForPost = (event) => {
-  //   const searchArray = posts.filter(item => {
-  //     const hashtagsArray = item.hashtags.map(item => item.name).toString().replace(/,/g, '').replace(/_/g, '')
-  //     setSavedCount(savedCount => savedCount + 1)
-  //     return (item.title.toLowerCase().replace(/,/g, '').replace(/_/g, '').includes((event.target.value.toLowerCase()).replace(/,/g, '').replace(/_/g, '')) || hashtagsArray.toLowerCase().includes(event.target.value.toLowerCase()))
-  //   })
-  //   setFilteredPosts(searchArray)
-  // }
-
-  // const [savedPosts, setSavedPosts] = useState(JSON.parse(localStorage.getItem('posts')))
-
-  // const savePost = (event) => {
-
-  //   if (!savedPosts.find((item => item.id === parseInt(event.target.id)))) {
-  //     savedPosts.push((posts.find(item => item.id === parseInt(event.target.id))))
-  //     window.localStorage.setItem('posts', JSON.stringify(savedPosts))
-  //     window.localStorage.setItem('postsCopy', JSON.stringify(savedPosts))
-  //     setCount(count => count + 1)
-  //     console.log
-  //   } else {
-  //     null
-  //   }
-  // }
-
-  // const [savedCount, setSavedCount] = useState(0)
-
-  // const seeSaved = () => {
-  //   setSavedPosts(JSON.parse(localStorage.getItem('posts')))
-  //   setSavedCount(savedCount => savedCount + 1)
-  //   setPosts(savedPosts)
-  // }
-
-  // const backLikeItWas = () => {
-  //   setSavedPosts(posts)
-  //   setPosts(postsBackup)
-  //   setSavedCount(savedCount => savedCount - 1)
-  // }
-
-  // const unsavePost = (event) => {
-  //   const storedPosts = JSON.parse(localStorage.getItem('posts'))
-  //   console.log(storedPosts)
-  //   const storedPostsWithoutUnsavedPost = storedPosts.filter(item => item.id !== parseInt(event.target.id))
-  //   console.log(storedPostsWithoutUnsavedPost)
-  //   window.localStorage.setItem('posts', JSON.stringify(storedPostsWithoutUnsavedPost))
-  //   const storedPostsAfterUpdate = JSON.parse(localStorage.getItem('posts'))
-  //   console.log(storedPostsAfterUpdate)
-  //   console.log(savedPosts.filter(item => item.id !== parseInt(event.target.id)))
-  //   setSavedPosts(savedPosts.filter(item => item.id !== parseInt(event.target.id)))
-  //   // setSavedPosts(storedPostsAfterUpdate)
-
-  // }
-
+  const goToTheTop = () => {
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+  }
   return (
     <>
       <div className="row">
@@ -301,8 +254,8 @@ const Posts2 = () => {
             }
           </div>
           <div className="">
-            <input type="text" placeholder="Look up for post" onChange={searchForPost} className="background shadow commenturl" id="search"/>
-            {userIsAuthenticated() ? (displayingSaved === true ? <button onClick={seeAllPosts} className="commentbutton shadow">See all posts</button> : <button className="commentbutton shadow" onClick={seeSavedPosts}>See saved posts</button>) : null}
+            <input type="text" placeholder="Look up for post" onChange={searchForPost} className="background shadow commenturl" id="search" />
+            {/* {userIsAuthenticated() ? (displayingSaved === true ? <button onClick={seeAllPosts} className="commentbutton shadow">See all posts</button> : <button className="commentbutton shadow" onClick={seeSavedPosts}>See saved posts</button>) : null} */}
           </div>
         </div>
       </div>
@@ -401,108 +354,10 @@ const Posts2 = () => {
           })}
         </div>
       </div>
-
-      {/* <div className="row">
-        <div className="hrefclass background">
-          <div className="">
-            <input type="text" placeholder="Look up for post" onChange={searchForPost} className="background shadow commenturl" />
-            {userIsAuthenticated() ? (savedCount > 0 ? <button onClick={backLikeItWas} className="commentbutton shadow">See all posts</button> : <button className="commentbutton shadow" onClick={seeSaved}>See saved posts</button>) : null}
-          </div>
-        </div>
-
-        <div>
-          <div className="background">
-            {((filteredPosts.length > 0 ? filteredPosts : posts)).map(item =>
-              <div key={item.id} id={item.id} className="separator shadow">
-                <p className="postname">{item.title}</p>
-                <p>{item.created_at.replace('T', ' at ').slice(0, 22)}</p>
-                <Link to="/posts" onClick={openInNewTab}><img src={item.image} alt="imageofpost" className="shadow" /></Link>
-                <p className="posttext">{item.text}</p>
-                <div className="hashtags">
-                  {item.hashtags.map(hashtag =>
-                    <div className="onehashtag shadow" key={hashtag.id}>
-                      <p ># {hashtag.name} </p>
-                    </div>
-                  )}
-                  {savedPosts.some(thing => thing.id === item.id) ? <p>❤️ You saved this post</p> : null}
-                </div>
-
-                {userIsAuthenticated() ? (savedPosts.some(thing => thing.id === item.id) ? <button onClick={unsavePost} id={item.id} className="commentbutton shadow">Fed up? Dislike!</button> : <button onClick={savePost} id={item.id} className="commentbutton shadow">Like it? Save it!</button>) : null}
-                {(item.owner.id === userId) ? <p className="nothappy">Not really happy about your post?</p> : null}
-                <div className="pairbuttons">
-                  {(item.owner.id === userId) ? <button className="bigred shadow" onClick={deleteConfirm} id={item.id}>Delete this post</button> : null}
-                  {(item.owner.id === userId) ? <button className="bigred shadow" onClick={editPost} id={item.id + ',' + item.owner.id}>Edit this post</button> : null}
-                </div>
-                <div id={item.index}><button className="commentbutton shadow" onClick={displayComments}>See comments</button>{showComments === true ?
-                  <div>
-                    {item.comments.map(comment =>
-                      <div key={comment.id} className="commentdiv shadow">
-                        <div className="commentheader">
-                          <img src={comment.owner.profile_image} className='profile_image shadow' alt='profileimage'></img>
-                          <h5>{comment.owner.username} added comment to that post on {comment.created_at.replace('T', ' at ').slice(0, 22)}</h5>
-                        </div>
-                        <div className="commentheadertextwrap">
-                          <p className="commentheadertext">{comment.text}</p>
-                        </div>
-                        <div>
-                          {comment.image.length === 0 ?
-                            null
-                            :
-                            <>
-                              <img className="commentimage" src={comment.image} alt="commentimage" />
-                            </>
-                          }
-                        </div>
-                        <div className="pairbuttons">
-                          {(comment.owner.id === userId) ? <button onClick={deleteComment} id={comment.id} className="deletecomment shadow">Delete this comment</button> : null}
-                        </div>
-                      </div>
-                    )}
-                    {userIsAuthenticated() ?
-                      <>
-                        <div>
-                          <form onSubmit={addComment}>
-                            <div>
-                              <label className="commenttextlabel">Add a comment:</label>
-                              <textarea onMouseOver={setToStorage} onClick={setToStorage} id={item.id} className="commenttextinput shadow"
-                                onChange={handleChange}
-                                type="textarea"
-                                name="text"
-                                placeholder="Type in your comment here"
-                                value={comment.text}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <label className="commenttextlabel">Add an url for an image to be attached, if you prefer:</label>
-                              <input className="shadow commenturl"
-                                onChange={handleChange}
-                                type="url"
-                                name="image"
-                                placeholder="Optional"
-                                value={comment.image}
-                              />
-                            </div>
-                            <div className="pairbuttons">
-                              <button type="submit" className="shadow">Leave your comment</button>
-                            </div>
-                          </form>
-                        </div>
-                      </>
-                      :
-                      <Link to="/login"><button className="commentbutton shadow">Login to comment</button></Link>
-                    }
-                  </div>
-                  :
-                  null
-                }
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-      </div> */}
+      <div className="footer">
+        {userIsAuthenticated() ? (displayingSaved === true ? <button onClick={seeAllPosts} className="commentbutton shadow except">See all posts</button> : <button className="commentbutton shadow except" onClick={seeSavedPosts}>See saved posts</button>) : null}
+        <button className="commentbutton shadow except" onClick={goToTheTop}>Go to the top</button>
+      </div>
     </>
 
   )

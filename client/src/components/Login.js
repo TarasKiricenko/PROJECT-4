@@ -28,12 +28,13 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    document.getElementById('loginone', 'logintwo').value = ''
     try {
       const { data } = await axios.post('api/jwt_auth/login/', formdata)
       setTokenToLocalStorage(data.token)
       window.alert('Welcome back!')
       setTimeout(function () {
-        history.push('/posts')
+        history.push('/')
       }, 500)
     } catch (err) {
       console.log(err)
@@ -54,7 +55,7 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label className="commenttextlabel">Email address</label>
-          <input className="commenturl shadow"
+          <input className="commenturl shadow" id="loginone"
             onChange={handleChange}
             type="email"
             name="email"
@@ -65,7 +66,7 @@ const Login = () => {
         </div>
         <div>
           <label className="commenttextlabel">Password</label>
-          <input className="commenturl shadow"
+          <input className="commenturl shadow" id="logintwo"
             onChange={handleChange}
             type="password"
             name="password"
@@ -80,7 +81,7 @@ const Login = () => {
             <button type="submit" className="deletecomment shadow" onClick={goRegister}>New here? Register</button>
           </div>
         </div>
-        {!errors ? <p></p> : <p style={{ color: 'red' }}>Something went wrong, double check your credentials.</p>}
+        {!errors ? null : <p style={{ color: 'red' }} className="commentheadertext">Something went wrong, double check your credentials.</p>}
       </form>
     </>
   )

@@ -211,6 +211,12 @@ p {
   }
 }
 
+@media screen and (max-width: 560px) {
+  * {
+    font-size: 12px;
+  }
+}
+
 .frontpageimage {
   align-items: center;
     align-self: center;
@@ -260,4 +266,18 @@ margin-top: 1vh;
 
 .speciallist {
   margin-bottom: 2vh;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 6vh;
+  background-color: rgb(157, 203, 150);
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
