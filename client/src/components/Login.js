@@ -40,7 +40,11 @@ const Login = () => {
       setErrors(err)
     }
   }
-  
+
+  const goRegister = () => {
+    history.push('/register')
+  }
+
   return (
     <>
       <div className="frontpagenav">
@@ -70,10 +74,12 @@ const Login = () => {
             required
           />
         </div>
-        <div className="pairbuttons">
-          <button type="submit" className="deletecomment shadow">Log in</button>
+        <div className="commentheadertextwrap">
+          <div className="pairbuttons">
+            <button type="submit" className="deletecomment shadow">Log in</button>
+            <button type="submit" className="deletecomment shadow" onClick={goRegister}>New here? Register</button>
+          </div>
         </div>
-        
         {!errors ? <p></p> : <p style={{ color: 'red' }}>Something went wrong, double check your credentials.</p>}
       </form>
     </>

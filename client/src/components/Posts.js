@@ -78,7 +78,7 @@ const Posts = () => {
 
   const addComment = async (event) => {
     event.preventDefault()
-    console.log('adding')
+    console.log(event, 'adding')
     try {
       await axios.post('api/comments/',
         comment
@@ -87,7 +87,6 @@ const Posts = () => {
       console.log('added')
       console.log(filteredPosts)
       clearCommentFields()
-      setRender(!render)
       setCount(count => count - 1)
     } catch (error) {
       console.log(error)
@@ -115,8 +114,8 @@ const Posts = () => {
     console.log('deleting')
     try {
       await axios.delete(`api/comments/${event.target.id}`)
-      // console.log(filteredPosts)
       setRender(!render)
+      setPosts(posts)
       // setCount(count => count + 1)
     } catch (error) {
       console.log(error)
@@ -135,8 +134,9 @@ const Posts = () => {
     }
   }
 
+
   const [filteredPosts, setFilteredPosts] = useState([])
-  
+
   const searchForPost = (event) => {
     const searchArray = posts.filter(item => {
       const hashtagsArray = item.hashtags.map(item => item.name).toString().replace(/,/g, '').replace(/_/g, '')
@@ -147,18 +147,19 @@ const Posts = () => {
   }
 
   const [savedPosts, setSavedPosts] = useState(JSON.parse(localStorage.getItem('posts')))
-
+  console.log(savedPosts)
   const savePost = (event) => {
-
+    console.log(event)
     if (!savedPosts.find((item => item.id === parseInt(event.target.id)))) {
-      savedPosts.push((posts.find(item => item.id === parseInt(event.target.id))))
-      window.localStorage.setItem('posts', JSON.stringify(savedPosts))
-      window.localStorage.setItem('postsCopy', JSON.stringify(savedPosts))
+      console.log('adding')
+      savedPosts.push(posts.find(item => item.id === parseInt(event.target.id)))
+      console.log(savedPosts)
       setCount(count => count + 1)
-      console.log
-    } else {
-      null
     }
+
+    window.localStorage.setItem('posts', JSON.stringify(savedPosts))
+    window.localStorage.setItem('postsCopy', JSON.stringify(savedPosts))
+    setCount(count => count + 1)
   }
 
   const [savedCount, setSavedCount] = useState(0)
@@ -176,6 +177,9 @@ const Posts = () => {
   }
 
   const unsavePost = (event) => {
+    console.log(event)
+    savedPosts.filter(item => item.id === !event.target.id)
+    console.log(savedPosts)
     const storedPosts = JSON.parse(localStorage.getItem('posts'))
     console.log(storedPosts)
     const storedPostsWithoutUnsavedPost = storedPosts.filter(item => item.id !== parseInt(event.target.id))
@@ -183,10 +187,13 @@ const Posts = () => {
     window.localStorage.setItem('posts', JSON.stringify(storedPostsWithoutUnsavedPost))
     const storedPostsAfterUpdate = JSON.parse(localStorage.getItem('posts'))
     console.log(storedPostsAfterUpdate)
+    const unsave = savedPosts.filter(item => item.id !== parseInt(event.target.id))
     console.log(savedPosts.filter(item => item.id !== parseInt(event.target.id)))
+    setSavedPosts(unsave)
     setSavedPosts(savedPosts.filter(item => item.id !== parseInt(event.target.id)))
+    setCount(count => count + 1)
     // setSavedPosts(storedPostsAfterUpdate)
-    
+
   }
 
   const handleLogout = () => {
@@ -239,8 +246,14 @@ const Posts = () => {
                   )}
                   {savedPosts.some(thing => thing.id === item.id) ? <p>❤️ You saved this post</p> : null}
                 </div>
-
-                {userIsAuthenticated() ? (savedPosts.some(thing => thing.id === item.id) ? <button onClick={unsavePost} id={item.id} className="commentbutton shadow">Fed up? Dislike!</button> : <button onClick={savePost} id={item.id} className="commentbutton shadow">Like it? Save it!</button>) : null}
+                {userIsAuthenticated() ?
+                  (savedPosts.some(thing => thing.id === item.id) ?
+                    <button onClick={unsavePost} id={item.id} className="commentbutton shadow">Fed up? Dislike!</button>
+                    :
+                    <button onClick={savePost} id={item.id} className="commentbutton shadow">Like it? Save it!</button>)
+                  :
+                  null
+                }
                 {(item.owner.id === userId) ? <p className="nothappy">Not really happy about your post?</p> : null}
                 <div className="pairbuttons">
                   {(item.owner.id === userId) ? <button className="bigred shadow" onClick={deleteConfirm} id={item.id}>Delete this post</button> : null}
@@ -248,7 +261,7 @@ const Posts = () => {
                 </div>
                 <div id={item.index}><button className="commentbutton shadow" onClick={displayComments}>See comments</button>{showComments === true ?
                   <div>
-                    {item.comments.map(comment =>
+                    {item.comments.sort().map(comment =>
                       <div key={comment.id} className="commentdiv shadow">
                         <div className="commentheader">
                           <img src={comment.owner.profile_image} className='profile_image shadow' alt='profileimage'></img>
