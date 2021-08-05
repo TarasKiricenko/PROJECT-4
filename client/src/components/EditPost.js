@@ -11,7 +11,7 @@ const EditPost = () => {
   const ownerOfPost = (idOfPostAndOwner.split(','))
   const ownerOfPostId = parseFloat(ownerOfPost[1])
   // eslint-disable-next-line 
-  const idOfPostToReturn = window.localStorage.setItem('idOfUpdatedPost', idOfPost)
+  // const idOfPostToReturn = window.localStorage.setItem('idOfUpdatedPost', idOfPost)
 
   useEffect(() => {
     const getPostToEditById = async () => {

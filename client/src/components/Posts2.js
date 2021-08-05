@@ -49,10 +49,11 @@ const Posts2 = () => {
   }
 
   const [displayingSaved, setDisplayingSaved] = useState(false)
-
+  console.log('currently displaying saved is', displayingSaved)
   const seeAllPosts = () => {
+
     setDisplayingSaved(!displayingSaved)
-    console.log('render all')
+    console.log('currently displaying saved is', displayingSaved)
     // setCount(count => count + 1)
     setPosts(postsBackup)
   }
@@ -77,8 +78,8 @@ const Posts2 = () => {
   // }
 
   const seeSavedPosts = () => {
+    console.log('currently displaying saved is', displayingSaved)
     setFilteredPosts([])
-    // document.getElementById('search').value = ''
     console.log('displaying saved')
     const postsFromStorage = JSON.parse(window.localStorage.getItem('posts'))
     console.log('post from local storage', postsFromStorage)
@@ -86,12 +87,28 @@ const Posts2 = () => {
     console.log('ids of posts from local storage', arrayOfStoredIds)
     const actualPosts = posts.map(item => item)
     console.log('actual posts on state', actualPosts)
-    
-    const updatedPostToDisplay = posts.filter(item => item.id === parseInt(arrayOfStoredIds))
-    console.log('actual post I need', updatedPostToDisplay)
+    if (postsFromStorage.length > 0) {
+      savedPosts.length = 0
+      for (let i = 0; i < postsFromStorage.length; i++) {
+        console.log(postsFromStorage[i].id)
+        if (posts.some(post => post.id === postsFromStorage[i].id)) {
+          console.log('yay')
+          const actualPost = posts.find(item => item.id === postsFromStorage[i].id)
+          console.log(actualPost)
+          savedPosts.push(actualPost)
+        }
+      }
+    }
+    // posts.find(item => item.id === parseInt(postToAddBackId))
+    // const updatedPostToDisplay = posts.filter(item => item.id === parseInt(arrayOfStoredIds))
+    // console.log('actual posts I need', updatedPostToDisplay)
     console.log(savedPosts)
-    savedPosts.push(updatedPostToDisplay[0])
-    savedPosts.shift()
+    // setSavedPosts(updatedPostToDisplay)
+    // setSavedPosts(postsFromStorage)
+    // savedPosts.length = 0
+    // console.log(savedPosts)
+    // savedPosts.push(updatedPostToDisplay[0,1,2,3,4,5,6,7,8,9,10])
+    // console.log(savedPosts)
     setDisplayingSaved(!displayingSaved)
     setPosts(savedPosts)
   }
@@ -103,14 +120,13 @@ const Posts2 = () => {
   const savePost = (event) => {
     console.log('saving post')
     if (!savedPosts.find((item => item.id === parseInt(event.target.id)))) {
-      const postToSave = (posts.find(item => item.id === parseInt(event.target.id)))
+      const postToSave = posts.find((item => item.id === parseInt(event.target.id)))
       console.log(postToSave)
       savedPosts.push(postToSave)
       window.localStorage.setItem('posts', JSON.stringify(savedPosts))
-      console.log(savedPosts)
       setSavedCount(!savedCount)
     } else {
-      console.log('already saved')
+      console.log(('already in'))
     }
   }
 
@@ -125,8 +141,10 @@ const Posts2 = () => {
       const savedPostsAfterDeletion = savedPosts.filter(item => item.id !== parseInt(event.target.id))
       console.log(event.target.id)
       console.log(savedPostsAfterDeletion)
-      setSavedPosts(savedPostsAfterDeletion)
+      // setCount(count => count + 1)
       setSavedCount(!savedCount)
+      setSavedPosts(savedPostsAfterDeletion)
+      setPosts(savedPosts)
     }
   }
 
@@ -289,7 +307,8 @@ const Posts2 = () => {
                   // eslint-disable-next-line 
                   <p className="commentheadertext">No one commented yet, be the first!</p>
                 }
-                {!showComments === false ? item.comments.map(comment =>
+                {/* {!showComments === false ? item.comments.map(comment => */}
+                {item.comments.length !== 0 && showComments === true ? item.comments.map(comment =>
                   <div key={comment.id} className="commentdiv shadow">
                     <div className="commentheader">
                       <img src={comment.owner.profile_image} className='profile_image shadow' alt='profileimage'></img>

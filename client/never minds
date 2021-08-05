@@ -1,0 +1,20 @@
+console.log('Displaying saved')
+    setFilteredPosts([])
+    const postsFromStorage = JSON.parse(window.localStorage.getItem('posts'))
+    const arrayOfSavedPosts = postsFromStorage.map(item => item.id)
+    console.log('ids of posts i need to get from real posts posts', arrayOfSavedPosts)
+    console.log('real posts', posts)
+    console.log(posts.filter(item => item.liked === true))
+    setSavedPosts(posts.filter(item => item.liked === true))
+
+    if (posts.find((item => item.id === parseInt(event.target.id)))) {
+      const postToSave = (posts.find(item => item.id === parseInt(event.target.id)))
+      postToSave.liked = true
+      const indexOfPostToSave = (posts.indexOf(`${postToSave}`))
+      console.log(indexOfPostToSave)
+      const arrayAfterFiltering = posts.filter(item => item.id !== parseInt(event.target.id))
+      console.log(arrayAfterFiltering)
+      arrayAfterFiltering.push(postToSave)
+      savedPosts.push(postToSave)
+      setPosts(arrayAfterFiltering)
+    }
