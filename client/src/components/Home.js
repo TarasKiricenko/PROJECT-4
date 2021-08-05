@@ -32,9 +32,9 @@ const Home = () => {
       {!userIsAuthenticated() ?
         <>
           <div className="frontpagenav">
-            <Link to="/login"><h3>Login</h3></Link>
-            <Link to="/register"><h3>Register</h3></Link>
-            <Link to="/posts"><h3>Continue as guest</h3></Link>
+            <Link to="/login/"><h3>Login</h3></Link>
+            <Link to="/register/"><h3>Register</h3></Link>
+            <Link to="/posts/"><h3>Continue as guest</h3></Link>
           </div>
           <FrontPagePart/>
         </>
@@ -42,7 +42,7 @@ const Home = () => {
         <>
           <div className="frontpagenav">
             <Link to='/' onClick={handleLogout}><h3>Logout</h3></Link>
-            <Link to="/posts"><h3>See all posts</h3></Link>
+            <Link to="/posts/"><h3>See all posts</h3></Link>
           </div>
           <FrontPagePart/>
         </>

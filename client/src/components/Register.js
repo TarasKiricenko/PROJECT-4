@@ -39,7 +39,7 @@ const Register = () => {
     try {
       await axios.post('/api/jwt_auth/register/', formdata)
       window.alert('Registration successful!')
-      history.push('/login')
+      history.push('/login/')
     } catch (error) {
       console.log(error.username)
       setErrors(error.response.data.data)
@@ -47,14 +47,14 @@ const Register = () => {
   }
 
   const goLogin = () => {
-    history.push('/login')
+    history.push('/login/')
   }
 
   return (
     <>
       <div className="frontpagenav">
         <Link to='/'><h3>Go back to homepage</h3></Link>
-        <Link to='/posts'><h3>See all posts</h3></Link>
+        <Link to='/posts/'><h3>See all posts</h3></Link>
       </div>
       <form onSubmit={handleSubmit}>
         <div>

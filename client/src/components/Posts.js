@@ -153,7 +153,7 @@ const Posts2 = () => {
     const confirm = window.confirm('Are you sure?')
     if (confirm) {
       try {
-        await axios.delete(`api/posts/${event.target.id}/`)
+        await axios.delete(`/api/posts/${event.target.id}/`)
         setCount(count => count + 1)
       } catch (error) {
         console.log(error.message)
@@ -172,7 +172,7 @@ const Posts2 = () => {
   const deleteComment = async (event) => {
     console.log('hi')
     try {
-      await axios.delete(`api/comments/${event.target.id}`)
+      await axios.delete(`/api/comments/${event.target.id}/`)
       setCount(count => count + 1)
     } catch (error) {
       console.log(error)
@@ -198,7 +198,7 @@ const Posts2 = () => {
     event.preventDefault()
     console.log('adding comment')
     try {
-      await axios.post('api/comments/', comment)
+      await axios.post('/api/comments/', comment)
       setCount(count => count + 1)
       clearCommentFields()
     } catch (error) {
@@ -264,11 +264,11 @@ const Posts2 = () => {
             <Link to='/'><h3>Go back to homepage</h3></Link>
             {userIsAuthenticated() ?
               <>
-                <Link to='/addpost'><h3>Add post</h3></Link>
+                <Link to='/addpost/'><h3>Add post</h3></Link>
                 <Link to='/' onClick={handleLogout}><h3>Logout</h3></Link>
               </>
               :
-              <Link to='/login'><h3>Login</h3></Link>
+              <Link to='/login/'><h3>Login</h3></Link>
             }
           </div>
           <div className="">

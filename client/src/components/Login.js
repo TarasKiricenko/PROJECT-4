@@ -30,7 +30,7 @@ const Login = () => {
     event.preventDefault()
     document.getElementById('loginone', 'logintwo').value = ''
     try {
-      const { data } = await axios.post('api/jwt_auth/login/', formdata)
+      const { data } = await axios.post('/api/jwt_auth/login/', formdata)
       setTokenToLocalStorage(data.token)
       window.alert('Welcome back!')
       setTimeout(function () {

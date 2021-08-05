@@ -13,7 +13,7 @@ const AddPost = () => {
     console.log('getting hashtags')
     const getHashtags = async () => {
       try {
-        const { data } = await axios.get('api/hashtags/')
+        const { data } = await axios.get('/api/hashtags/')
         setHashtags(data)
         console.log(data)
       } catch (err) {
@@ -36,13 +36,13 @@ const AddPost = () => {
     console.log('submit')
     event.preventDefault()
     try {
-      await axios.post('api/posts/',
+      await axios.post('/api/posts/',
         formdata,
         {
           headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
         }
       )
-      history.push('/posts/')
+      history.push('/posts')
     } catch (error) {
       console.log(error.message)
     }
