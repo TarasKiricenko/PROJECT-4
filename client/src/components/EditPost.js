@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from './authentication/authentication'
 import { Link, useHistory } from 'react-router-dom'
-// import AddPost from './AddPost'
 
 const EditPost = () => {
 
@@ -10,14 +9,11 @@ const EditPost = () => {
   const idOfPost = parseFloat(idOfPostAndOwner)
   const ownerOfPost = (idOfPostAndOwner.split(','))
   const ownerOfPostId = parseFloat(ownerOfPost[1])
-  // eslint-disable-next-line 
-  // const idOfPostToReturn = window.localStorage.setItem('idOfUpdatedPost', idOfPost)
 
   useEffect(() => {
     const getPostToEditById = async () => {
       try {
         const { data } = await axios.get(`api/posts/${idOfPost}`)
-        // console.log(data)
         setFormdata(data)
       } catch (error) {
         console.log(error)
@@ -100,7 +96,6 @@ const EditPost = () => {
       }
     }
     formdataHashtags.push(event.target.innerText)
-    // formdataHashtags.push(event.target.id)
     clearSearchField()
     document.getElementById('hashtag-input-id').value = ' '
   }
@@ -114,7 +109,7 @@ const EditPost = () => {
     const indexToDelete = formdataHashtags[index + 1]
     const deleteHashtagAtIndex = formdata.hashtags.indexOf(indexToDelete)
     formdata.hashtags.splice(deleteHashtagAtIndex, 2)
-    event.target.classList.add('hidden')
+    event.target.parentElement.classList.add('hidden')
     console.log(formdata)
     if (formdata.hashtags.length === 0) {
       setFormdataHashtags([])

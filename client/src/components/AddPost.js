@@ -42,7 +42,7 @@ const AddPost = () => {
           headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
         }
       )
-      history.push('/posts')
+      history.push('/posts/')
     } catch (error) {
       console.log(error.message)
     }
@@ -82,7 +82,7 @@ const AddPost = () => {
     const deleteHashtagAtIndex = formdata.hashtags.indexOf(indexToDelete)
     formdata.hashtags.splice(deleteHashtagAtIndex, 2)
     console.log(formdata)
-    event.target.classList.add('hidden')
+    event.target.parentElement.classList.add('hidden')
     if (formdata.hashtags.length === 0) {
       setFormdataHashtags([])
     }
