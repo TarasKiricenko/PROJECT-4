@@ -82,7 +82,7 @@ Final thing - set right data to state of posts to be rendered correctly. Probabl
 <hr>
 <li>Demo of responsiveness.</li>
 
-https://user-images.githubusercontent.com/81250034/129736270-17e42b95-c26b-4ced-8af2-afedccc27f78.mov
+https://user-images.githubusercontent.com/81250034/129736681-b8c75e0a-f432-4d42-b881-9d3f6a27509d.mov
 
 <br>
 This is because all custom CSS is based on VH and VW as dimensions.
