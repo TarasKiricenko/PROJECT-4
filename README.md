@@ -50,16 +50,20 @@ DetailView allows us to delete and modify posts, also checking if edited post fi
 <br>
 <br>
 <hr>
-<li>Few things about authentication, lets have a look at :</li>
+<li>Little bit about authentication, lets have a look at password handling:</li>
 <br>
 <img src="https://user-images.githubusercontent.com/81250034/129717552-11899828-181b-48fc-ba44-b382ee63d474.png" alt="[Screenshot 2021-08-17 at 14 21 59]"/>
 We won't save our password and its confirmation as they come, just use them for validation, check if they match, and then store password encrypted way. 
 <br>
 <br>
-<hr>
-<li>Closing backend, let have a look at how Register/Login business works:</li>
+I will use other fields from class Meta in front-end building, that is why not all fields are returning as data.
 <br>
-<img width="821" alt="Screenshot 2021-08-16 at 23 05 11" src="https://user-images.githubusercontent.com/81250034/129623053-c7dff7f5-97dd-4c9d-9e99-eb8127cf6b6c.png">
+<br>
+<hr>
+<li>Looking at the frontend, first thing I would like to pay attention to is sensitive information. I do need it for authentication, but I dont want to display it:</li>
+<br>
+![Screenshot 2021-08-17 at 15 23 37](https://user-images.githubusercontent.com/81250034/129725003-1076f353-cc8b-4914-80cb-a651f0382434.png)
+
 It takes data from frontend register forms, and sends it as JSON request body to API. If validation is passed, returns positive, if not - error.
 <br>
 <br>
