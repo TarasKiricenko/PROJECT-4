@@ -21,7 +21,6 @@ Gallery website, with CRUD functionality, saved favourites, commenting.
 <img width="1400" alt="Screenshot 2021-08-17 at 11 54 55" src="https://user-images.githubusercontent.com/81250034/129695613-2c872467-f792-4364-b907-9db0b91d609a.png">
 <br>
 <img width="1369" alt="Screenshot 2021-08-17 at 12 07 27" src="https://user-images.githubusercontent.com/81250034/129697474-f7058ef2-33fa-4685-be0f-13df5de84ac2.png">
-<br>
 <img width="1367" alt="Screenshot 2021-08-17 at 12 08 47" src="https://user-images.githubusercontent.com/81250034/129697680-5a42af13-b495-4ecc-95ca-982a62099c81.png">
 <br>
 <h2>Build:</h2>
