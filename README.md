@@ -36,6 +36,13 @@ Gallery website, with CRUD functionality, saved favourites, commenting.
 <li>Post model, super simple, set alike to post in twitter:</li>
 <br>
 <img src="https://user-images.githubusercontent.com/81250034/129712500-515a5929-14e0-46d8-83e3-f8625accb15f.png" alt="[Screenshot 2021-08-17 at 13 43 37]"/>
+Only one field of all is optional - image. Created_at - automated. Hashtags - many to many, (refers to hashtag model). Owner field, many to one (referring to user model). 
+<br>
+<br>
+<hr>
+<li>All posts have 2 viewsm ListView and DetailView, both have functions as requests to them:</li>
+<br>
+![Screenshot 2021-08-17 at 13 55 58](https://user-images.githubusercontent.com/81250034/129714169-d5b86660-5203-4fe7-83e7-eb52e1894b68.png)
 
 Only one field of all is optional - image. Created_at - automated. Hashtags - many to many, (refers to hashtag model). Owner field, many to one (referring to user model). 
 <br>
