@@ -62,8 +62,7 @@ I will use other fields from class Meta in front-end building, that is why not a
 <hr>
 <li>Looking at the frontend, first thing I would like to pay attention to is sensitive information. I do need it for authentication, but I dont want to display it:</li>
 <br>
-![Screenshot 2021-08-17 at 15 23 37](https://user-images.githubusercontent.com/81250034/129725003-1076f353-cc8b-4914-80cb-a651f0382434.png)
-
+<img src="https://user-images.githubusercontent.com/81250034/129725003-1076f353-cc8b-4914-80cb-a651f0382434.png" alt ="[Screenshot 2021-08-17 at 15 23 37]"/>
 It takes data from frontend register forms, and sends it as JSON request body to API. If validation is passed, returns positive, if not - error.
 <br>
 <br>
