@@ -67,9 +67,11 @@ First thing I do here - email deletion, and only then any sort of logic.
 <br>
 <br>
 <hr>
-<li>Looking at the frontend, I had to solve an issue of getting a particular comment to be deleted:</li>
+<li>I had an issue with my favourites, as it was saving only data at particular moment of time, not including any updates or added comments. Solution:</li>
 <br>
-<img width="963" alt="Screenshot 2021-08-16 at 23 32 48" src="https://user-images.githubusercontent.com/81250034/129625962-be236ecf-3e5c-4529-b6c8-ff6b5b5bf027.png">
+
+<img src="https://user-images.githubusercontent.com/81250034/129726020-de40a50d-61be-48a8-96fb-026d772243ba.png" alt="[Screenshot 2021-08-17 at 15 32 11]"/>
+
 I had to use 4 layered ternary and onMouseOver with onClick together, to perform the action, where only user who added the comment can delete it.
 <br>
 <br>
