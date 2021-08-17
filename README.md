@@ -1,4 +1,3 @@
-![Screenshot 2021-08-17 at 13 43 37](https://user-images.githubusercontent.com/81250034/129712500-515a5929-14e0-46d8-83e3-f8625accb15f.png)
 # Taras Social Gallery
 Final project for the course. Full stack app, based on Django framework, written in python backend, with React frontend.
 
@@ -39,9 +38,6 @@ Gallery website, with CRUD functionality, saved favourites, commenting.
 <img src="https://user-images.githubusercontent.com/81250034/129712500-515a5929-14e0-46d8-83e3-f8625accb15f.png" alt="[Screenshot 2021-08-17 at 13 43 37]"/>
 
 Only one field of all is optional - image. Created_at - automated. Hashtags - many to many, (refers to hashtag model). Owner field, many to one (referring to user model). 
-<br>
-<br>
-User, who we try to verify has to be found by his id, which is "sub" in our token payload and if user is found we can move towards next function utilizing next().
 <br>
 <br>
 <hr>
