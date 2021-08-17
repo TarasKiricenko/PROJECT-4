@@ -46,7 +46,7 @@ Only one field of all is optional - image. Created_at - automated. Hashtags - ma
 ListView "get" brings you back all posts as tesponse, "post" check new one against model criteria and if it has all needed, saves it to DB. 
 <br>
 <br>
-DetailView allows us to delete and modify posts, also checking if edits fits criteria. PK here - automatically applied sort of ID, used for request handling.
+DetailView allows us to delete and modify posts, also checking if edited post fits criteria. PK here - automatically applied sort of ID, used for request handling.
 <br>
 <br>
 <hr>
