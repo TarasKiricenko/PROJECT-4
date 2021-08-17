@@ -53,10 +53,7 @@ DetailView allows us to delete and modify posts, also checking if edited post fi
 <li>Few things about authentication, lets have a look at :</li>
 <br>
 <img src="https://user-images.githubusercontent.com/81250034/129717552-11899828-181b-48fc-ba44-b382ee63d474.png" alt="[Screenshot 2021-08-17 at 14 21 59]"/>
-Good example of setting a virtual field of avgRating to schema making sure it is set to JSON when response has been sent back from API.
-<br>
-<br>
-Both "comments" and "workspaces" have referenced owner field, which will be represented through Id.
+We won't save our password and its confirmation as they come, just use them for validation, check if they match, and then store password encrypted way. 
 <br>
 <br>
 <hr>
