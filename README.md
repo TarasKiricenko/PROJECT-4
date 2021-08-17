@@ -53,7 +53,7 @@ DetailView allows us to delete and modify posts, also checking if edited post fi
 <li>Little bit about authentication, lets have a look at password handling:</li>
 <br>
 <img src="https://user-images.githubusercontent.com/81250034/129717552-11899828-181b-48fc-ba44-b382ee63d474.png" alt="[Screenshot 2021-08-17 at 14 21 59]"/>
-We won't save our password and its confirmation as they come, just use them for validation, check if they match, and then store password encrypted way. 
+I won't save our password and its confirmation as they come, just use them for validation, check if they match, and then store password encrypted way. 
 <br>
 <br>
 I will use other fields from class Meta in front-end building, that is why not all fields are returning as data.
@@ -69,13 +69,14 @@ First thing I do here - email deletion, and only then any sort of logic.
 <hr>
 <li>I had an issue with my favourites, as it was saving only data at particular moment of time, not including any updates or added comments. Solution:</li>
 <br>
-
 <img src="https://user-images.githubusercontent.com/81250034/129726020-de40a50d-61be-48a8-96fb-026d772243ba.png" alt="[Screenshot 2021-08-17 at 15 32 11]"/>
-
-I had to use 4 layered ternary and onMouseOver with onClick together, to perform the action, where only user who added the comment can delete it.
+My favourites are based in local storage, so I get them using JSON.parse. If that array is present (longer than 0), I am making sure, that savedPosts (favourites) are empty.
 <br>
 <br>
-Whole set of JSX is written with help of Bootstrap, another great framework to use. It was my first attempt to use it.
+Using "for" loop, I am matching the id's if posts stored locally against ids of ones that are stored in DB, (meaning, updated, edited or untouched), and pushing them into "favourites".
+<br>
+<br>
+Final thing - set right data to state of posts to be rendered correctly. Probably not too elegant, but works well.
 <br>
 <br>
 <hr>
