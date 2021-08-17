@@ -40,10 +40,13 @@ Only one field of all is optional - image. Created_at - automated. Hashtags - ma
 <br>
 <br>
 <hr>
-<li>All posts have 2 viewsm ListView and DetailView, both have functions as requests to them:</li>
+<li>All posts have 2 views, ListView and DetailView, both have functions working as requests to them:</li>
 <br>
 <img src="https://user-images.githubusercontent.com/81250034/129714169-d5b86660-5203-4fe7-83e7-eb52e1894b68.png" alt ="[Screenshot 2021-08-17 at 13 55 58]"/>
-Only one field of all is optional - image. Created_at - automated. Hashtags - many to many, (refers to hashtag model). Owner field, many to one (referring to user model). 
+ListView "get" brings you back all posts as tesponse, "post" check new one against model criteria and if it has all needed, saves it to DB. 
+<br>
+<br>
+DetailView allows us to delete and modify posts, also checking if edits fits criteria. PK here - automatically applied sort of ID, used for request handling.
 <br>
 <br>
 <hr>
