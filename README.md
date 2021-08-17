@@ -35,7 +35,9 @@ Gallery website, with CRUD functionality, saved favourites, commenting.
 <h2>Sample code:</h2>
 <li>Post model, super simple, set alike to post in twitter:</li>
 <br>
-![Screenshot 2021-08-17 at 13 32 05](https://user-images.githubusercontent.com/81250034/129710914-be6fa98a-60eb-4fd1-9699-ba17c04bc2c9.png)
+![Screenshot 2021-08-17 at 13 39 19](https://user-images.githubusercontent.com/81250034/129711934-39117f3b-96f5-45a6-b906-495f0b797792.png)
+
+
 Only one field of all is optional - image. Created_at - automated. Hashtags - many to many, (refers to hashtag model). Owner field, many to one (referring to user model). 
 <br>
 <br>
