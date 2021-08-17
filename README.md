@@ -50,9 +50,9 @@ DetailView allows us to delete and modify posts, also checking if edited post fi
 <br>
 <br>
 <hr>
-<li>Here is our schema for "workspace", our main API "unit", with embedded and reference relationship with "comments and "user" respectively:</li>
+<li>Few things about authentication, lets have a look at :</li>
 <br>
-<img width="613" alt="Screenshot 2021-08-16 at 22 46 47" src="https://user-images.githubusercontent.com/81250034/129620911-8c150ef4-92ae-41a3-816d-37729adbde70.png">
+<img src="https://user-images.githubusercontent.com/81250034/129717552-11899828-181b-48fc-ba44-b382ee63d474.png" alt="[Screenshot 2021-08-17 at 14 21 59]"/>
 Good example of setting a virtual field of avgRating to schema making sure it is set to JSON when response has been sent back from API.
 <br>
 <br>
