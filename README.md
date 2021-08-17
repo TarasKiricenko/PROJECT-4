@@ -80,12 +80,14 @@ Final thing - set right data to state of posts to be rendered correctly. Probabl
 <br>
 <br>
 <hr>
-<li>Another great thing to see on the homepage, carousel.</li>
+<li>Demo of responsiveness.</li>
+
+https://user-images.githubusercontent.com/81250034/129736270-17e42b95-c26b-4ced-8af2-afedccc27f78.mov
+
 <br>
-Just 20 lines of code in JSX.
+This is because all custom CSS is based on VH and VW as dimensions.
 <br>
 <br>
-<img width="911" alt="Screenshot 2021-08-17 at 00 40 11" src="https://user-images.githubusercontent.com/81250034/129632910-d0bdd79b-27a2-4c56-bde4-feae630b5313.png">
 <h2>Wins and challenges:</h2>
 <h4>Wins</h4>
 <li>Great possibility to develop both side of MERN APP, where I was concentrating on Authentiaction at the backend and Event section at the frontend.</li>
