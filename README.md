@@ -42,7 +42,7 @@ Only one field of all is optional - image. Created_at - automated. Hashtags - ma
 <hr>
 <li>All posts have 2 viewsm ListView and DetailView, both have functions as requests to them:</li>
 <br>
-<img src="https://user-images.githubusercontent.com/81250034/129714169-d5b86660-5203-4fe7-83e7-eb52e1894b68.png: alt ="[Screenshot 2021-08-17 at 13 55 58]"/>
+<img src="https://user-images.githubusercontent.com/81250034/129714169-d5b86660-5203-4fe7-83e7-eb52e1894b68.png" alt ="[Screenshot 2021-08-17 at 13 55 58]"/>
 Only one field of all is optional - image. Created_at - automated. Hashtags - many to many, (refers to hashtag model). Owner field, many to one (referring to user model). 
 <br>
 <br>
