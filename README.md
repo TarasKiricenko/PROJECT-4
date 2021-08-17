@@ -90,20 +90,17 @@ This is because all custom CSS is based on VH and VW as dimensions.
 <br>
 <h2>Wins and challenges:</h2>
 <h4>Wins</h4>
-<li>Great possibility to develop both side of MERN APP, where I was concentrating on Authentiaction at the backend and Event section at the frontend.</li>
-<li>Perfect opportunity to practice MongoDB, solidifying knowledge about relationships and modelling.</li>
-<li>Lovely occasion of group programming, using GitHub collectively, practising version control and branch adjustments. Fantastic experience working as a part of great team, probably one of the most important experiences during the course. </li>
+<li>Perfect opportunity to work with PostgreSQL and Django framework, alongside of building own backend in Python.</li>
+<li>Fully achieved responsiveness without using any styling frameworks. Great practice of custom CSS.</li>
+<li>Great practice with JS while building frontend. There was quite few complicated tasks to manage, including right rendering and setting right data states.</li>
 
 <h4>Challenges</h4>
-<li>There was quite difficult way to manage error handling on contact form I created, I used default methods, that is still a point to improve.</li>
-<li>Time-management, where we had to adjust our group work to 3 different time zones, balancing with self-development and healthy life.</li>
-<li>Version control was quite challenging. I had to throw our development branch back once and restore data to needed condition, trying to resolve unnecessary node modules being pushed to it. Great fun!</li>
+<li>There was few complicated points managing errors when registering, that is still a point to improve. There is error handling, but it is far from perfect.</li>
+<li>Python is still quite new language for me, it is difficult to use entirely new system at self-sustainable level.</li>
+<li>Planning of own time for over a week period and allocating particular resources to it - something tough to manage.</li>
 
 <h2>Potential improvements:</h2>
-<li>Make server send emails when registering.</li>
-<li>Shopping cart functionality, with potential booking slots available.</li>
-<li>Functionality for the map definitely needs imporvements, all markers on it displayed simultaneously for now.</li>
-<li>I would love to implement pin on map in order to set up location for workspace, rather than typing it in when trying to register new one.</li>
-
-<h2>My colleagues, who also worked on this project:</h2>
-<a href="https://github.com/emilesherrott">Emile Sherrot</a> | <a href="https://github.com/sarandis10">Sarantis Atonakas</a> | <a href="https://github.com/crigrande">Cristina Grande</a>
+<li>Styling needs to be improved, using grids instead of scroll page.</li>
+<li>I would like to add messaging system: say, posts get a comment - user who created it gets notification of some sort.</li>
+<li>Good idea here - manage to actually upload the files, rather than setting images with links.</li>
+<li>Ability for users to add their own hashtags. I think, I over-complicated this task, it just should be input converted into "hashtag".</li>
