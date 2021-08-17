@@ -33,10 +33,10 @@ Gallery website, with CRUD functionality, saved favourites, commenting.
 (for more detailed examples see "sample code")
     
 <h2>Sample code:</h2>
-<li>Here we can see, how secure route is working at our backend:</li>
+<li>Post model, super simple, set alike to post in twitter:</li>
 <br>
-<img width="614" alt="Screenshot 2021-08-16 at 22 28 16" src="https://user-images.githubusercontent.com/81250034/129619301-22bd7f71-a3ce-468a-96d5-cb31bb88121c.png">
-In this asynchronous function, we first check, if our "headers" are present, and if so, we try to verfify our user through JWT payload.
+![Screenshot 2021-08-17 at 13 32 05](https://user-images.githubusercontent.com/81250034/129710914-be6fa98a-60eb-4fd1-9699-ba17c04bc2c9.png)
+Only one field of all is optional - image. Created_at - automated. Hashtags - many to many, (refers to hashtag model). Owner field, many to one (referring to user model). 
 <br>
 <br>
 User, who we try to verify has to be found by his id, which is "sub" in our token payload and if user is found we can move towards next function utilizing next().
